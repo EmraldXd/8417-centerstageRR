@@ -19,6 +19,7 @@ public class mecanumDrive {
     DcMotor fL;
     DcMotor bR;
     DcMotor bL;
+    DcMotor lE;
     double fRPwr;
     double fLPwr;
     double bRPwr;
@@ -36,14 +37,15 @@ public class mecanumDrive {
         fL = hardwareMap.get(DcMotor.class, "Front Left");
         bR = hardwareMap.get(DcMotor.class, "Back Right");
         bL = hardwareMap.get(DcMotor.class, "Back Left");
+        lE = hardwareMap.get(DcMotor.class, "leftEncoder");
 
         fR.setDirection(DcMotorSimple.Direction.REVERSE);
         bL.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        fR.setMode(DcMotor.RunMode.RUN_USING_ENCODER); // Sets the mode of the motors to run WITH encoders
-        fL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        bR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        bL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        fR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER); // Sets the mode of the motors to run WITH encoders
+        fL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        bR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        bL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     public void slowMode(Boolean enable) {
@@ -100,5 +102,6 @@ public class mecanumDrive {
         telemetry.addData("Front Right Ticks", fR.getCurrentPosition());
         telemetry.addData("Back Left Ticks", bL.getCurrentPosition());
         telemetry.addData("Back Right Ticks", bR.getCurrentPosition());
+        telemetry.addData("encoder pos:", lE.getCurrentPosition());
     }
 }

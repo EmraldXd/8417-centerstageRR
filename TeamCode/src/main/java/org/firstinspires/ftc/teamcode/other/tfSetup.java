@@ -47,12 +47,12 @@ public class tfSetup {
         visionPortal = builder.build();
     }
 
-    public String runTfodLabel() {
+    public String runTfodLabel(String key) {
         if(tfod != null) {
             List<Recognition> recognitions = tfod.getRecognitions();
             if (recognitions != null) {
                 for (Recognition recognition : recognitions) {
-                    if (recognition.getConfidence() > colorConfidence && Math.abs(recognition.getRight() - recognition.getLeft()) <= 175) {
+                    if (recognition.getConfidence() > colorConfidence && Math.abs(recognition.getRight() - recognition.getLeft()) <= 175 && recognition.getLabel().equals(key)) {
                         colorConfidence = recognition.getConfidence();
                         label = recognition.getLabel();
                     }

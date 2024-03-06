@@ -47,7 +47,7 @@ public class tfodAuto extends OpMode {
     }
 
     public void init_loop() {
-        colorProp = tfSetup.runTfodLabel();
+        colorProp = tfSetup.runTfodLabel("Fix this if we go back to it");
         position = tfSetup.runTfodSide();
         if (gamepad1.dpad_left) {
             fieldSide = 0;

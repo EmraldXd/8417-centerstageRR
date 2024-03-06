@@ -51,4 +51,11 @@ public class linearSlide {
         telemetry.addData("Right slide position: ", df.format(mR.getCurrentPosition()));
         telemetry.addData("Sensor pressed", touchSensorPressed());
     }
+
+    public void resetEncoder() {
+        mL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        mR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        mL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        mR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
 }
