@@ -39,8 +39,8 @@ public class mecanumDrive {
         bL = hardwareMap.get(DcMotor.class, "Back Left");
         lE = hardwareMap.get(DcMotor.class, "leftEncoder");
 
-        fR.setDirection(DcMotorSimple.Direction.REVERSE);
-        bL.setDirection(DcMotorSimple.Direction.REVERSE);
+        bR.setDirection(DcMotorSimple.Direction.REVERSE);
+        fL.setDirection(DcMotorSimple.Direction.REVERSE);
 
         fR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER); // Sets the mode of the motors to run WITH encoders
         fL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
