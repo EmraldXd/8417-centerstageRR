@@ -68,20 +68,20 @@ public class tfodRR extends LinearOpMode {
             if(teamChosen) {
                 if (!leftSide && teamColor.equals("red")) {
 
-                    TrajectorySequence LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(12.16, -59.77, Math.toRadians(91.10)))
+                    LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(12.16, -59.77, Math.toRadians(91.10)))
                             .splineTo(new Vector2d(48.27, -29.19), Math.toRadians(0.00))
                             .lineTo(new Vector2d(8.81, -34.14))
                             .splineTo(new Vector2d(60.21, -59.62), Math.toRadians(0.00))
                             .build();
 
-                    TrajectorySequence MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, -63.00, Math.toRadians(90.00)))
+                    MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, -63.00, Math.toRadians(90.00)))
                             .splineTo(new Vector2d(48.00, -36.00), Math.toRadians(0.00))
                             .lineTo(new Vector2d(24.00, -24.00))
                             .splineTo(new Vector2d(62.00, -60.00), Math.toRadians(0.00))
                             .build();
 
 
-                    TrajectorySequence RightAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, -63.00, Math.toRadians(90.00)))
+                    RightAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, -63.00, Math.toRadians(90.00)))
                             .splineTo(new Vector2d(48.00, -42.00), Math.toRadians(0.00))
                             .lineTo(new Vector2d(31.00, -30.00))
                             .splineTo(new Vector2d(61.00, -60.00), Math.toRadians(0.00))
@@ -89,19 +89,19 @@ public class tfodRR extends LinearOpMode {
 
                 } else if (leftSide && teamColor.equals("blue")) {
 
-                    TrajectorySequence LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, 63.00, Math.toRadians(-90.00)))
+                    LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, 63.00, Math.toRadians(-90.00)))
                             .splineTo(new Vector2d(48.00, 42.00), Math.toRadians(0.00))
                             .lineTo(new Vector2d(9.00, 35.00))
                             .splineTo(new Vector2d(62.00, 60.00), Math.toRadians(0.00))
                             .build();
 
-                    TrajectorySequence MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, 63.00, Math.toRadians(270.00)))
+                    MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, 63.00, Math.toRadians(270.00)))
                             .splineTo(new Vector2d(48.00, 36.00), Math.toRadians(360.00))
                             .lineTo(new Vector2d(24.00, 24.00))
                             .splineTo(new Vector2d(62.00, 60.00), Math.toRadians(360.00))
                             .build();
 
-                    TrajectorySequence RightAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, 63.00, Math.toRadians(-90.00)))
+                    RightAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, 63.00, Math.toRadians(-90.00)))
                             .splineTo(new Vector2d(48.00, 30.00), Math.toRadians(0.00))
                             .lineTo(new Vector2d(31.00, 35.00))
                             .splineTo(new Vector2d(62.00, 60.00), Math.toRadians(0.00))
@@ -109,7 +109,7 @@ public class tfodRR extends LinearOpMode {
 
                 } else if (leftSide && teamColor.equals("red")) {
 
-                    TrajectorySequence LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(-36.00, -63.00, Math.toRadians(90.00)))
+                    LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(-36.00, -63.00, Math.toRadians(90.00)))
                             .UNSTABLE_addTemporalMarkerOffset(0.00,() -> {})
                             .UNSTABLE_addTemporalMarkerOffset(0.00,() -> {})
                             .lineTo(new Vector2d(-47.00, -42.00))
@@ -118,7 +118,7 @@ public class tfodRR extends LinearOpMode {
                             .lineTo(new Vector2d(48.00, -30.00))
                             .build();
 
-                    TrajectorySequence MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(-36.00, -63.00, Math.toRadians(90.00)))
+                    MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(-36.00, -63.00, Math.toRadians(90.00)))
                             .lineTo(new Vector2d(-51.00, -39.00))
                             .lineToConstantHeading(new Vector2d(-47.39, -24.24))
                             .splineToConstantHeading(new Vector2d(-8.95, -9.25), Math.toRadians(0.00))
@@ -126,23 +126,23 @@ public class tfodRR extends LinearOpMode {
                             .lineTo(new Vector2d(48.00, -36.00))
                             .build();
 
-                    TrajectorySequence RightAuto = drive.trajectorySequenceBuilder(new Pose2d(-36.00, -63.00, Math.toRadians(90.00)))
+                    RightAuto = drive.trajectorySequenceBuilder(new Pose2d(-36.00, -63.00, Math.toRadians(90.00)))
                             .splineTo(new Vector2d(-32.00, -35.00), Math.toRadians(0.00))
                             .lineTo(new Vector2d(-53.00, -13.00))
                             .lineTo(new Vector2d(26.00, -11.00))
                             .splineToSplineHeading(new Pose2d(48.00, -42.00, Math.toRadians(0.00)), Math.toRadians(0.00))
                             .build();
 
-                } else if (!leftSide && teamColor.equals(teamColor.equals("blue"))) {
+                } else if (!leftSide && teamColor.equals("blue")) {
 
-                    TrajectorySequence RightAuto = drive.trajectorySequenceBuilder(new Pose2d(-36.00, 63.00, Math.toRadians(270.00)))
+                    RightAuto = drive.trajectorySequenceBuilder(new Pose2d(-36.00, 63.00, Math.toRadians(270.00)))
                             .splineTo(new Vector2d(-32.00, 35.00), Math.toRadians(360.00))
                             .lineTo(new Vector2d(-53.00, 13.00))
                             .lineTo(new Vector2d(26.00, 11.00))
                             .splineToSplineHeading(new Pose2d(48.00, 42.00, Math.toRadians(360.00)), Math.toRadians(360.00))
                             .build();
 
-                    TrajectorySequence MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(-36.00, 63.00, Math.toRadians(270.00)))
+                    MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(-36.00, 63.00, Math.toRadians(270.00)))
                             .lineTo(new Vector2d(-51.00, 39.00))
                             .lineToConstantHeading(new Vector2d(-47.39, 24.24))
                             .splineToConstantHeading(new Vector2d(-8.95, 9.25), Math.toRadians(360.00))
@@ -150,7 +150,7 @@ public class tfodRR extends LinearOpMode {
                             .lineTo(new Vector2d(48.00, 36.00))
                             .build();
 
-                    TrajectorySequence LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(-36.00, 63.00, Math.toRadians(270.00)))
+                    LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(-36.00, 63.00, Math.toRadians(270.00)))
                             .UNSTABLE_addTemporalMarkerOffset(0.00,() -> {})
                             .UNSTABLE_addTemporalMarkerOffset(0.00,() -> {})
                             .lineTo(new Vector2d(-47.00, 42.00))
@@ -168,13 +168,13 @@ public class tfodRR extends LinearOpMode {
                 if(name != null) {
                     propPos = tfSetup.runTfodSide();
                 }
-
-                //TELEMETRY
-                telemetry.addData("Current team: ", teamColor);
-                telemetry.addData("Team locked in? ", teamChosen);
-                telemetry.addData("Team prop label: ", name);
-                telemetry.addData("Team prop position: ", propPos);
             }
+            //TELEMETRY
+            telemetry.addData("Current team: ", teamColor);
+            telemetry.addData("Team locked in? ", teamChosen);
+            telemetry.addData("Team prop label: ", name);
+            telemetry.addData("Team prop position: ", propPos);
+            telemetry.addData("Team side: ", leftSide ? "Left" : "right");
             telemetry.update();
         }
         //START

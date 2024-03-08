@@ -52,7 +52,7 @@ public class tfSetup {
             List<Recognition> recognitions = tfod.getRecognitions();
             if (recognitions != null) {
                 for (Recognition recognition : recognitions) {
-                    if (recognition.getConfidence() > colorConfidence && Math.abs(recognition.getRight() - recognition.getLeft()) <= 175 && recognition.getLabel().equals(key)) {
+                    if (recognition.getConfidence() > colorConfidence && Math.abs(recognition.getRight() - recognition.getLeft()) <= 175) {
                         colorConfidence = recognition.getConfidence();
                         label = recognition.getLabel();
                     }
@@ -76,12 +76,11 @@ public class tfSetup {
                             position = "left";
                         } else if(locationX > 160) {
                             position = "middle";
+                        } else {
+                            position = "right";
                         }
                     }
                 }
-            }
-            if(recognitions == null) {
-                position = "right";
             }
         }
         return position;
