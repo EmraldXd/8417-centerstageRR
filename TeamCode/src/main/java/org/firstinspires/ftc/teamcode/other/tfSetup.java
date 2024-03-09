@@ -69,6 +69,9 @@ public class tfSetup {
         if(tfod != null) {
             List<Recognition> recognitions = tfod.getRecognitions();
             if(recognitions != null) {
+                if (recognitions.size() == 0) {
+                    position = "right";
+                }
                 for(Recognition recognition : recognitions) {
                     if(recognition.getConfidence() > locationConfidence) {
                         locationX = (recognition.getRight() + recognition.getLeft()) / 2;
@@ -76,11 +79,11 @@ public class tfSetup {
                             position = "left";
                         } else if(locationX > 160) {
                             position = "middle";
-                        } else {
-                            position = "right";
                         }
                     }
                 }
+            } else {
+                position = "right";
             }
         }
         return position;

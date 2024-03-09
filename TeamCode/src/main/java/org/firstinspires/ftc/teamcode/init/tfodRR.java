@@ -68,114 +68,117 @@ public class tfodRR extends LinearOpMode {
             if(teamChosen) {
                 if (!leftSide && teamColor.equals("red")) {
 
-                    LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, -60.00, Math.toRadians(90.00)))
-                            .splineTo(new Vector2d(44.00, -30.00), Math.toRadians(0.00))
-                            .lineToLinearHeading(new Pose2d(8.00, -34.00, Math.toRadians(180.00)))
-                            .lineToLinearHeading(new Pose2d(37.00, -60.43, Math.toRadians(0.00)))
-                            .splineTo(new Vector2d(60.00, -60.00), Math.toRadians(0.00))
+                    LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, -63.00, Math.toRadians(90.00)))
+                            .splineTo(new Vector2d(48.00, -30.00), Math.toRadians(0.59))
+                            .lineToLinearHeading(new Pose2d(9.00, -35.00, Math.toRadians(180.00)))
+                            .lineToSplineHeading(new Pose2d(36.00, -60.00, Math.toRadians(0.00)))
+                            .splineTo(new Vector2d(61.00, -60.00), Math.toRadians(0.00))
                             .build();
 
-
-                    MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, -60.00, Math.toRadians(90.00)))
-                            .splineTo(new Vector2d(44.00, -36.00), Math.toRadians(0.00))
-                            .lineTo(new Vector2d(23.00, -25.00))
-                            .splineToLinearHeading(new Pose2d(60.00, -60.00, Math.toRadians(0.00)), Math.toRadians(0.00))
+                    MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, -63.00, Math.toRadians(90.00)))
+                            .splineTo(new Vector2d(48.00, -36.00), Math.toRadians(0.00))
+                            .lineToLinearHeading(new Pose2d(23.00, -25.00, Math.toRadians(180.00)))
+                            .lineToLinearHeading(new Pose2d(36.00, -60.00, Math.toRadians(0.00)))
+                            .splineTo(new Vector2d(61.00, -60.00), Math.toRadians(0.00))
                             .build();
 
-
-
-                    RightAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, -60.00, Math.toRadians(90.00)))
-                            .splineTo(new Vector2d(44.00, -42.00), Math.toRadians(0.00))
-                            .lineToLinearHeading(new Pose2d(12.00, -60.00, Math.toRadians(90.00)))
-                            .splineTo(new Vector2d(23.00, -42.00), Math.toRadians(90.00))
-                            .lineTo(new Vector2d(38.63, -55.39))
-                            .lineTo(new Vector2d(60.00, -60.00))
+                    RightAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, -63.00, Math.toRadians(90.00)))
+                            .splineTo(new Vector2d(48.00, -43.00), Math.toRadians(0.00))
+                            .lineToSplineHeading(new Pose2d(31.00, -36.00, Math.toRadians(180.00)))
+                            .lineToSplineHeading(new Pose2d(36.00, -60.00, Math.toRadians(0.57)))
+                            .splineTo(new Vector2d(61.00, -60.00), Math.toRadians(0.00))
                             .build();
 
+                    drive.setPoseEstimate(LeftAuto.start());
 
                 } else if (leftSide && teamColor.equals("blue")) {
 
-                    LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, 60.00, Math.toRadians(270.00)))
-                            .splineTo(new Vector2d(44.00, 42.00), Math.toRadians(360.00))
-                            .lineToLinearHeading(new Pose2d(12.00, 60.00, Math.toRadians(270.00)))
-                            .splineTo(new Vector2d(23.00, 42.00), Math.toRadians(270.00))
-                            .lineTo(new Vector2d(38.63, 55.39))
-                            .lineTo(new Vector2d(60.00, 60.00))
+                    LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, 63.00, Math.toRadians(270.00)))
+                            .splineTo(new Vector2d(48.00, 43.00), Math.toRadians(360.00))
+                            .lineToSplineHeading(new Pose2d(31.00, 36.00, Math.toRadians(180.00)))
+                            .lineToSplineHeading(new Pose2d(36.00, 60.00, Math.toRadians(359.43)))
+                            .splineTo(new Vector2d(61.00, 60.00), Math.toRadians(360.00))
                             .build();
 
-
-                    MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, 60.00, Math.toRadians(270.00)))
-                            .splineTo(new Vector2d(44.00, 36.00), Math.toRadians(360.00))
-                            .lineTo(new Vector2d(23.00, 25.00))
-                            .splineToLinearHeading(new Pose2d(60.00, 60.00, Math.toRadians(360.00)), Math.toRadians(360.00))
+                    MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, 63.00, Math.toRadians(270.00)))
+                            .splineTo(new Vector2d(48.00, 36.00), Math.toRadians(360.00))
+                            .lineToLinearHeading(new Pose2d(23.00, 25.00, Math.toRadians(180.00)))
+                            .lineToLinearHeading(new Pose2d(36.00, 60.00, Math.toRadians(360.00)))
+                            .splineTo(new Vector2d(61.00, 60.00), Math.toRadians(360.00))
                             .build();
 
-
-                    RightAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, 60.00, Math.toRadians(270.00)))
-                            .splineTo(new Vector2d(44.00, 30.00), Math.toRadians(360.00))
-                            .lineToLinearHeading(new Pose2d(8.00, 34.00, Math.toRadians(180.00)))
-                            .lineToLinearHeading(new Pose2d(37.00, 60.43, Math.toRadians(360.00)))
-                            .splineTo(new Vector2d(60.00, 60.00), Math.toRadians(360.00))
+                    MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, 63.00, Math.toRadians(270.00)))
+                            .splineTo(new Vector2d(48.00, 36.00), Math.toRadians(360.00))
+                            .lineToLinearHeading(new Pose2d(23.00, 25.00, Math.toRadians(180.00)))
+                            .lineToLinearHeading(new Pose2d(36.00, 60.00, Math.toRadians(360.00)))
+                            .splineTo(new Vector2d(61.00, 60.00), Math.toRadians(360.00))
                             .build();
 
+                    drive.setPoseEstimate(LeftAuto.start());
 
                 } else if (leftSide && teamColor.equals("red")) {
 
-                    LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(-36.56, -62.81, Math.toRadians(90.00)))
-                            .splineTo(new Vector2d(-47.09, -41.15), Math.toRadians(90.00))
-                            .lineToConstantHeading(new Vector2d(-38.78, -35.81))
-                            .splineTo(new Vector2d(-38.93, -23.51), Math.toRadians(90.00))
-                            .splineTo(new Vector2d(-6.30, -10.46), Math.toRadians(0.00))
-                            .splineTo(new Vector2d(14.46, -32.26), Math.toRadians(-90.00))
-                            .lineToLinearHeading(new Pose2d(43.00, -31.00, Math.toRadians(0.00)))
+                    LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(-35.00, -63.00, Math.toRadians(90.00)))
+                            .splineTo(new Vector2d(-47.00, -42.00), Math.toRadians(90.00))
+                            .lineTo(new Vector2d(-36.00, -42.00))
+                            .splineTo(new Vector2d(-36.00, -13.00), Math.toRadians(90.00))
+                            .lineTo(new Vector2d(11.00, -13.00))
+                            .lineToSplineHeading(new Pose2d(48.00, -30.00, Math.toRadians(2.44)))
+                            .lineTo(new Vector2d(43.00, -13.00))
+                            .splineTo(new Vector2d(61.00, -13.00), Math.toRadians(0.37))
                             .build();
 
-
-                    MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(-36.00, -63.00, Math.toRadians(90.00)))
-                            .lineTo(new Vector2d(-51.00, -39.00))
-                            .lineToConstantHeading(new Vector2d(-47.39, -24.24))
-                            .splineToConstantHeading(new Vector2d(-8.95, -9.25), Math.toRadians(0.00))
-                            .lineTo(new Vector2d(26.00, -11.00))
-                            .lineTo(new Vector2d(48.00, -36.00))
+                    MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(-35.00, -63.00, Math.toRadians(90.00)))
+                            .splineTo(new Vector2d(-47.00, -25.00), Math.toRadians(0.00))
+                            .lineToSplineHeading(new Pose2d(-53.00, -13.00, Math.toRadians(90.00)))
+                            .lineTo(new Vector2d(11.00, -13.00))
+                            .lineToSplineHeading(new Pose2d(48.00, -36.00, Math.toRadians(0.00)))
+                            .lineTo(new Vector2d(43.00, -13.00))
+                            .splineTo(new Vector2d(61.00, -13.00), Math.toRadians(0.00))
                             .build();
 
-                    RightAuto = drive.trajectorySequenceBuilder(new Pose2d(-36.00, -63.00, Math.toRadians(90.00)))
-                            .splineTo(new Vector2d(-32.00, -35.00), Math.toRadians(0.00))
-                            .lineTo(new Vector2d(-53.00, -13.00))
-                            .lineTo(new Vector2d(26.00, -11.00))
-                            .splineToSplineHeading(new Pose2d(48.00, -42.00, Math.toRadians(0.00)), Math.toRadians(0.00))
+                    MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(-35.00, -63.00, Math.toRadians(90.00)))
+                            .splineTo(new Vector2d(-47.00, -25.00), Math.toRadians(0.00))
+                            .lineToSplineHeading(new Pose2d(-53.00, -13.00, Math.toRadians(90.00)))
+                            .lineTo(new Vector2d(11.00, -13.00))
+                            .lineToSplineHeading(new Pose2d(48.00, -36.00, Math.toRadians(0.00)))
+                            .lineTo(new Vector2d(43.00, -13.00))
+                            .splineTo(new Vector2d(61.00, -13.00), Math.toRadians(0.00))
                             .build();
+
+                    drive.setPoseEstimate(LeftAuto.start());
 
                 } else if (!leftSide && teamColor.equals("blue")) {
 
-                    LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(-36.56, -62.81, Math.toRadians(90.00)))
-                            .splineTo(new Vector2d(-47.09, -41.15), Math.toRadians(90.00))
-                            .lineToConstantHeading(new Vector2d(-38.78, -35.81))
-                            .splineTo(new Vector2d(-38.93, -23.51), Math.toRadians(90.00))
-                            .splineTo(new Vector2d(-6.30, -10.46), Math.toRadians(0.00))
-                            .splineTo(new Vector2d(14.46, -32.26), Math.toRadians(-90.00))
-                            .lineToLinearHeading(new Pose2d(43.00, -31.00, Math.toRadians(0.00)))
+                    LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(-35.00, 63.00, Math.toRadians(270.00)))
+                            .splineTo(new Vector2d(-32.00, 36.00), Math.toRadians(360.00))
+                            .lineToSplineHeading(new Pose2d(-53.00, 13.00, Math.toRadians(270.00)))
+                            .lineTo(new Vector2d(11.00, 13.00))
+                            .lineToSplineHeading(new Pose2d(48.00, 43.00, Math.toRadians(360.00)))
+                            .lineTo(new Vector2d(43.00, 13.00))
+                            .splineTo(new Vector2d(61.00, 13.00), Math.toRadians(360.00))
                             .build();
 
-
-                    MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(-36.70, 62.81, Math.toRadians(-90.00)))
-                            .splineToLinearHeading(new Pose2d(-47.23, 24.54, Math.toRadians(-0.73)), Math.toRadians(-0.73))
-                            .lineTo(new Vector2d(-52.72, 8.82))
-                            .lineTo(new Vector2d(15.20, 9.27))
-                            .splineToLinearHeading(new Pose2d(43.00, 36.00, Math.toRadians(0.00)), Math.toRadians(0.00))
-                            .lineTo(new Vector2d(43.53, 13.12))
-                            .splineTo(new Vector2d(60.14, 12.98), Math.toRadians(0.00))
+                    MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(-35.00, 63.00, Math.toRadians(270.00)))
+                            .splineTo(new Vector2d(-47.00, 25.00), Math.toRadians(360.00))
+                            .lineToSplineHeading(new Pose2d(-53.00, 13.00, Math.toRadians(270.00)))
+                            .lineTo(new Vector2d(11.00, 13.00))
+                            .lineToSplineHeading(new Pose2d(48.00, 36.00, Math.toRadians(360.00)))
+                            .lineTo(new Vector2d(43.00, 13.00))
+                            .splineTo(new Vector2d(61.00, 13.00), Math.toRadians(360.00))
                             .build();
 
-
-                    LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(-36.00, 63.00, Math.toRadians(270.00)))
-                            .UNSTABLE_addTemporalMarkerOffset(0.00,() -> {})
-                            .UNSTABLE_addTemporalMarkerOffset(0.00,() -> {})
-                            .lineTo(new Vector2d(-47.00, 42.00))
-                            .splineTo(new Vector2d(-36.00, 12.00), Math.toRadians(270.00))
-                            .lineTo(new Vector2d(26.00, 11.00))
-                            .lineTo(new Vector2d(48.00, 30.00))
+                    RightAuto = drive.trajectorySequenceBuilder(new Pose2d(-35.00, 63.00, Math.toRadians(270.00)))
+                            .splineTo(new Vector2d(-47.00, 42.00), Math.toRadians(270.00))
+                            .lineTo(new Vector2d(-36.00, 42.00))
+                            .splineTo(new Vector2d(-36.00, 13.00), Math.toRadians(270.00))
+                            .lineTo(new Vector2d(11.00, 13.00))
+                            .lineToSplineHeading(new Pose2d(48.00, 30.00, Math.toRadians(357.56)))
+                            .lineTo(new Vector2d(43.00, 13.00))
+                            .splineTo(new Vector2d(61.00, 13.00), Math.toRadians(359.63))
                             .build();
+
+                    drive.setPoseEstimate(LeftAuto.start());
 
                 }
                 if(teamColor.equals("red")) {
