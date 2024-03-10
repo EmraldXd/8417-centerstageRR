@@ -210,7 +210,7 @@ public class tfodRR extends LinearOpMode {
             telemetry.addData("Auto time elapsed: ", autoRuntime.seconds());
             telemetry.addData("Action time elapsed: ", actionRuntime.seconds());
 
-            if(propPos.equals("right")) {
+            if(propPos.equals("right") || (!propPos.equals("middle") && !propPos.equals("left"))) {
                 drive.followTrajectorySequence(RightAuto);
             }
 
