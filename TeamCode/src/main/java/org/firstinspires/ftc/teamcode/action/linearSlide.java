@@ -24,6 +24,7 @@ public class linearSlide {
     double slidePower;
 
 
+
     public void init(@NonNull OpMode opMode) {
         HardwareMap hardwareMap = opMode.hardwareMap;
         telemetry = opMode.telemetry;
@@ -34,6 +35,11 @@ public class linearSlide {
         mR.setDirection(DcMotorSimple.Direction.REVERSE);
         mL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
+
+    /**
+     * Takes the slidePowerInput parameter and uses it to set the power of the linear slides.
+     * @param slidePowerInput is player 2's left stick Y input which is used to move the slides.
+     */
     public void setPower(double slidePowerInput) {
         slidePower = slidePowerInput * totalPower * -1;
         if(!(touchSensorPressed() && slidePower < 0) && !(mR.getCurrentPosition() > 2700 && slidePower > 0)){
@@ -42,6 +48,10 @@ public class linearSlide {
         }
     }
 
+    /**
+     * This exists to let the robot know that the slides have gone far enough down.
+     * @return whether the sensor is pressed.
+     */
     public boolean touchSensorPressed() {
         return !touchSensor.getState();
     }
@@ -52,6 +62,9 @@ public class linearSlide {
         telemetry.addData("Sensor pressed", touchSensorPressed());
     }
 
+    /**
+     * Resets the encoder
+     */
     public void resetEncoder() {
         mL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         mR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -59,11 +72,26 @@ public class linearSlide {
         mR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
-    public void startSlide() {
+    /**
+     * Starts the slides moving upward in our roadrunner autonomous.
+     */
+    public void startSlideUp() {
         mL.setPower(-0.5);
         mR.setPower(-0.5);
     }
 
+    /**
+     * Starts the slides moving downward in our roadrunner autonomous.
+     */
+
+    public void startSlidesDown() {
+        mL.setPower(0.5);
+        mR.setPower(0.5);
+    }
+
+    /**
+     * Stops the slides and holds them in the position they are at.
+     */
     public void stopSlide() {
         mL.setPower(-0.06);
         mR.setPower(-0.06);

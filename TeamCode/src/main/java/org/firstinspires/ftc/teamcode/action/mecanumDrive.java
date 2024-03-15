@@ -48,6 +48,10 @@ public class mecanumDrive {
         bL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
+    /**
+     * Speeds up and slows down the robot during driver-controlled.
+     * @param enable player 1's "turbo" button (LB)
+     */
     public void slowMode(Boolean enable) {
         slowSpeed = enable ? 1.00 : 0.50;
     }
@@ -73,6 +77,16 @@ public class mecanumDrive {
         bL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
+    /**
+     * Sets the power of the motors during driver-controlled, or our drive-by-time autonomous.
+     * @param x is the X position of player 1's left stick, used for left and right movement.
+     *          This is also used for the strafe value in our drive-by-time auto.
+     * @param y is the Y position of player 1's left stick, used for forward and backward movement.
+     *          This is also used for the drive value in our drive-by-time auto.
+     * @param rot is the X position of player 1's right stick, used for clockwise and
+     *            counter-clockwise rotation. This is also used for the rotation value in our
+     *            drive-by-time auto.
+     */
     public void setPower(double x, double y, double rot) {
         x = x * 1.1;
         y = -y;

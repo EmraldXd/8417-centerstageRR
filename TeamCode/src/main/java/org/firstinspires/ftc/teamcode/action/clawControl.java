@@ -61,6 +61,13 @@ public class clawControl {
         telemetry = opMode.telemetry;
     }
 
+    /**
+     * This opens the inside and outside claws. Note that the inside claw WILL NOT open if the
+     * outside claw is currently closed, nor will the outside claw close if the inside claw is
+     * open. This will prevent the two claws from killing each other. This has happened before.
+     * @param rightBumperPressed opens and closes the small claw.
+     * @param leftBumperPressed opens and closes the large claw.
+     */
     public void openClaw(boolean rightBumperPressed, boolean leftBumperPressed)
     {
         if (delay1.time() > delayLength && !outClawClosed) {
@@ -122,6 +129,9 @@ public class clawControl {
         }
     }
 
+    /**
+     * This just opens the inside claw in our autonomous code.
+     */
     public void openInsideClaw() {
         if(autoOpenIn) {
             try {
@@ -136,6 +146,9 @@ public class clawControl {
         }
     }
 
+    /**
+     * This is the code above's littlest brother.
+     */
     public void openOutsideClaw() {
         if(autoOpenOut) {
             try {
@@ -150,6 +163,9 @@ public class clawControl {
         }
     }
 
+    /**
+     * This is the middle child. Theres not much more that is needed to be said.
+     */
     public void toggleArm() {
         if(isUp) {
             las.setPosition(lowestPosition);

@@ -43,6 +43,10 @@ public class winchControl {
         winch.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
+    /**
+     * This allows us to engage and disengage our lock on the lift-winch.
+     * @param isPressed is the boolean of whether or not player 1's lock button (RB) is pressed.
+     */
     public void lockSet (boolean isPressed) {
         if(isPressed && !unlocked && discoBugSquasher.time() >= delay) {
             lock.setPosition(unlockPos);
@@ -55,6 +59,11 @@ public class winchControl {
         }
     }
 
+    /**
+     * Begins turning our winch in order to lift our robot. This will only work if the lock is
+     * DISENGAGED in the above code.
+     * @param isPressed is the boolean value if player 1's wind button (B) is pressed.
+     */
     public void windWinch(boolean isPressed) {
         if(unlocked && isPressed) {
             winch.setPower(winchPower);

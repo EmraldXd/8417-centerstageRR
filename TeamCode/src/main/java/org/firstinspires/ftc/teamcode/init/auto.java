@@ -35,8 +35,6 @@ public class auto extends OpMode {
          * code all in one place, because nobody wants a mess of code that looks more like spaghetti
          * than something that was written by an actual human being. */
 
-        droneSlingshot.start(); //Should move the servo to the launch position.
-
         if (gamepad1.x) { // If the blue button is pushed on the controller
             teamColor = "Blue";
         }else if(gamepad1.b) { //If the red button is pushed on the controller
@@ -169,6 +167,14 @@ public class auto extends OpMode {
 
     }
 
+    /**
+     * This lets our code know that we want a motor power applied to motors in a specific way, and
+     * this OpMode will keep track of the time.
+     * @param secondsToRunFor is how long this OpMode needs to keep track of.
+     * @param yAxisPower is how fast forward and back we want to go.
+     * @param xAxisPower is how fast to the left or right we want to strafe.
+     * @param rotation is how fast clockwise or counter-clockwise we want to turn.
+     */
     public void mecanumDrive(double secondsToRunFor, double yAxisPower, double xAxisPower, double rotation) {
             mecanumDrive.slowMode(true); //Despite what it says, this will make the robot go at max speed
             yAxisPower = yAxisPower * -1;
@@ -180,6 +186,11 @@ public class auto extends OpMode {
             }
     }
 
+    /**
+     * This is a custom-built wait() command. We have to have this, because OpModes do not like to
+     * looping.
+     * @param secondsToWait is our value to wait for,
+     */
     public void waitThenGoToNextAction(double secondsToWait) {
         if(actionRuntime.time() >= secondsToWait) {
             robotAction++; //moves to next action

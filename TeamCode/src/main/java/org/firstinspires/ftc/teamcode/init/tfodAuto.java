@@ -1073,6 +1073,14 @@ public class tfodAuto extends OpMode {
         }
 
 
+    /**
+     * This lets our code know that we want a motor power applied to motors in a specific way, and
+     * this OpMode will keep track of the time.
+     * @param secondsToRunFor is how long this OpMode needs to keep track of.
+     * @param yAxisPower is how fast forward and back we want to go.
+     * @param xAxisPower is how fast to the left or right we want to strafe.
+     * @param rotation is how fast clockwise or counter-clockwise we want to turn.
+     */
     public void mecanumDrive(double secondsToRunFor, double yAxisPower, double xAxisPower, double rotation) {
         mecanumDrive.slowMode(true); //Despite what it says, this will make the robot go at max speed
         yAxisPower = yAxisPower * -1;
@@ -1084,6 +1092,11 @@ public class tfodAuto extends OpMode {
         }
     }
 
+    /**
+     * This is a custom-built wait() command. We have to have this, because OpModes do not like to
+     * looping.
+     * @param secondsToWait is our value to wait for,
+     */
     public void waitThenGoToNextAction(double secondsToWait) {
         if(actionRuntime.time() >= secondsToWait) {
             robotAction++; //moves to next action
@@ -1091,24 +1104,38 @@ public class tfodAuto extends OpMode {
         }
     }
 
+    /**
+     * This opens and closes the inside claw with a single line of code.
+     */
     public void toggleSmallClaw(){
         clawControl.openInsideClaw();
         robotAction++;
         actionRuntime.reset();
     }
 
+    /**
+     * This does the same as the above code, only for the outside claw.
+     */
     public void toggleOutsideClaw(){
         clawControl.openOutsideClaw();
         robotAction++;
         actionRuntime.reset();
     }
 
+    /**
+     * This moves the claw arm up and down with a single line of code.
+     */
     public void armToggle() {
         clawControl.toggleArm();
         robotAction++;
         actionRuntime.reset();
     }
 
+    /**
+     * This works like the mecanumDrive() command, only used for the linear slides.
+     * @param time is how long we want to move the slides for.
+     * @param power is how fast we want to move the slides.
+     */
     public void moveSlidesForTime(double time, double power) {
         double slidePower = power * -1;
         linearSlide.setPower(slidePower);
@@ -1119,16 +1146,48 @@ public class tfodAuto extends OpMode {
         }
     }
 
+
+    /*
+    One thing to note on the below commands. This is the aprilTag's Pose RELATIVE TO THE ROBOT, NOT
+    THE OTHER WAY AROUND. Hence why some people may end up with the incorrect results. I had run
+    headlong into that dead end when I first tried this.
+     */
+    /**
+     * Using the aprilTag's Pose, we are able to make an educated guess about where the robot is on
+     * the X axis in relation to that aprilTag, and where we want to end up (directly in front of
+     * the aprilTag). The math can be found in my little leather notebook. If you want to see it, I
+     * will try and add a link to a web page here:
+     * If there is nothing there, ask the team, and I will gladly allow them to grab a hold of the
+     * notebook.
+     * @param x is the aprilTag's X position relative to the robot.
+     * @param yaw is the aprilTag's yaw rotation relative to the robot.
+     * @return is the number that is the result of all the juicy trigonometry involved.
+     */
     public double findTagX(double x, double yaw) {
         //return ((x * Math.cos(Math.abs(yaw))) - 5);                                               //Formula that was made on 2/14/2024
         return (x * Math.cos(Math.toRadians(yaw)));
     }
 
+    /**
+     * Using the aprilTag's Pose, we are able to make an educated guess about the distance on the Y
+     * axis from the BASE of the backdrop, with a constant that makes that guess about the Y
+     * distance from where we want to end up. Once again, little leather notebook.
+     * @param y is the aprilTag's Y position relative to the robot.
+     * @param z is the aprilTag's Z position relative to the robot.
+     * @param pitch is the aprilTag's pitch rotation relative to the robot.
+     * @return is the number that results from the OTHER juicy trigonometric equation down below.
+     */
     public double findTagY(double y, double z, double pitch) {
         //return ((3 * (y * Math.cos(Math.toDegrees(Math.asin(z / y))) + Math.abs(pitch))) / 4);    This was pretty off, but I typed it wrong
         return ((3 * (y * Math.cos(Math.asin(z / y) + Math.toRadians(pitch))) / 4) - 2);
     }
 
+    /**
+     * This takes tagX, and tagY and divides whichever is smaller by whichever is greater. This way
+     * we end up with a ratio that is some number over 1, as motor power scales from -1 to 1.
+     * @param tagX is the result of findTagX().
+     * @param tagY is the result of findTagY().
+     */
     public void lineUpToTag(double tagX, double tagY) {
         if(timesReset == 0){
             distance = Math.sqrt(Math.pow(tagX, 2) + Math.pow(tagY, 2));
@@ -1140,7 +1199,11 @@ public class tfodAuto extends OpMode {
         telemetry.addData("Time to move: ", time);
         telemetry.addData("Distance from board (inch): ", distance);
         if(tagX > tagY) {
-            powerX = 1;
+            if(powerX < 0) {
+                powerX = -1;
+            } else if (powerX > 0) {
+                powerX = 1;
+            }
             powerY = tagY / tagX;
             rotPower = tagY / tagX;
         } else if (tagY > tagX) {
@@ -1158,6 +1221,17 @@ public class tfodAuto extends OpMode {
         }
     }
 
+    /**
+     * This moves the robot to the left or right (depending on what side it is on) searching for the
+     * aprilTag that matches the position of the team prop. This will move towards the center in 5
+     * short bursts, and if it is unable to find the aprilTag, then it will park. If the aprilTags
+     * are found, the robot will calculate it's X and Y distance from where it wishes to end up,
+     * allowing for the robot to accurately place a pixel on the backboard.
+     * @param foundTag is the boolean value that keeps track of whether or not the aprilTag that the
+     *                 robot is looking for is found.
+     * @param direction is the positive or negative value that keeps track of the direction the
+     *                  robot is to strafe in order to move to the center.
+     */
     public void scanForAprilTag(boolean foundTag, float direction) {
         mecanumDrive.slowMode(true); //Despite what it says, this will make the robot go at max speed
         if(foundTag) {
