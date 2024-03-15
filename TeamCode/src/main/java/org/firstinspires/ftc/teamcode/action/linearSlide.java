@@ -41,8 +41,8 @@ public class linearSlide {
      * @param slidePowerInput is player 2's left stick Y input which is used to move the slides.
      */
     public void setPower(double slidePowerInput) {
-        slidePower = slidePowerInput * totalPower * -1;
-        if(!(touchSensorPressed() && slidePower < 0) && !(mR.getCurrentPosition() > 2700 && slidePower > 0)){
+        slidePower = slidePowerInput * totalPower;
+        if(!(touchSensorPressed() && slidePower > 0) && !(mR.getCurrentPosition() > 2700 && slidePower > 0)){
             mL.setPower(slidePower * .5);
             mR.setPower(slidePower * .5);
         }
@@ -76,24 +76,23 @@ public class linearSlide {
      * Starts the slides moving upward in our roadrunner autonomous.
      */
     public void startSlideUp() {
-        mL.setPower(-0.5);
-        mR.setPower(-0.5);
+        mL.setPower(0.5);
+        mR.setPower(0.5);
     }
 
     /**
      * Starts the slides moving downward in our roadrunner autonomous.
      */
-
     public void startSlidesDown() {
-        mL.setPower(0.5);
-        mR.setPower(0.5);
+        mL.setPower(-0.5);
+        mR.setPower(-0.5);
     }
 
     /**
      * Stops the slides and holds them in the position they are at.
      */
     public void stopSlide() {
-        mL.setPower(-0.06);
-        mR.setPower(-0.06);
+        mL.setPower(0.06);
+        mR.setPower(0.06);
     }
 }
