@@ -4,21 +4,18 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.RR.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.RR.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.action.clawControl;
 import org.firstinspires.ftc.teamcode.action.linearSlide;
-import org.firstinspires.ftc.teamcode.action.mecanumDrive;
 import org.firstinspires.ftc.teamcode.other.tfSetup;
 
 @Autonomous(name = "roadRunner")
 public class tfodRR extends LinearOpMode {
     //CONSTRUCT
     org.firstinspires.ftc.teamcode.other.tfSetup tfSetup = new tfSetup();
-    org.firstinspires.ftc.teamcode.action.mecanumDrive mecanumDrive = new mecanumDrive();
     org.firstinspires.ftc.teamcode.action.linearSlide linearSlide = new linearSlide();
     org.firstinspires.ftc.teamcode.action.clawControl clawControl = new clawControl();
     ElapsedTime actionRuntime = new ElapsedTime();
@@ -39,13 +36,9 @@ public class tfodRR extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        mecanumDrive.init(this);
         linearSlide.init(this);
         clawControl.init(this);
         tfSetup.init(this);
-
-        mecanumDrive.slowMode(true); //This allows the robot to go at max speed
-        mecanumDrive.runWithoutEncoder();
 
         drive = new SampleMecanumDrive(hardwareMap);
         while(opModeInInit()) {
@@ -69,23 +62,35 @@ public class tfodRR extends LinearOpMode {
                 if (!leftSide && teamColor.equals("red")) {
 
                     LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, -63.00, Math.toRadians(90.00)))
-                            .splineTo(new Vector2d(48.00, -30.00), Math.toRadians(0.59))
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
+                            .splineTo(new Vector2d(48.00, -30.00), Math.toRadians(0.00))
+                            .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                             .lineToLinearHeading(new Pose2d(9.00, -35.00, Math.toRadians(180.00)))
+                            .addDisplacementMarker(0.45, 0, () -> clawControl.toggleArm())
+                            .addDisplacementMarker(() -> clawControl.openInsideClaw())
                             .lineToSplineHeading(new Pose2d(36.00, -60.00, Math.toRadians(0.00)))
                             .splineTo(new Vector2d(61.00, -60.00), Math.toRadians(0.00))
                             .build();
 
                     MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, -63.00, Math.toRadians(90.00)))
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .splineTo(new Vector2d(48.00, -36.00), Math.toRadians(0.00))
+                            .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                             .lineToLinearHeading(new Pose2d(23.00, -25.00, Math.toRadians(180.00)))
+                            .addDisplacementMarker(0.45, 0, () -> clawControl.toggleArm())
+                            .addDisplacementMarker(() -> clawControl.openInsideClaw())
                             .lineToLinearHeading(new Pose2d(36.00, -60.00, Math.toRadians(0.00)))
                             .splineTo(new Vector2d(61.00, -60.00), Math.toRadians(0.00))
                             .build();
 
                     RightAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, -63.00, Math.toRadians(90.00)))
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .splineTo(new Vector2d(48.00, -43.00), Math.toRadians(0.00))
+                            .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                             .lineToSplineHeading(new Pose2d(31.00, -36.00, Math.toRadians(180.00)))
-                            .lineToSplineHeading(new Pose2d(36.00, -60.00, Math.toRadians(0.57)))
+                            .addDisplacementMarker(0.45, 0, () -> clawControl.toggleArm())
+                            .addDisplacementMarker(() -> clawControl.openInsideClaw())
+                            .lineToSplineHeading(new Pose2d(36.00, -60.00, Math.toRadians(0.00)))
                             .splineTo(new Vector2d(61.00, -60.00), Math.toRadians(0.00))
                             .build();
 
@@ -94,22 +99,34 @@ public class tfodRR extends LinearOpMode {
                 } else if (leftSide && teamColor.equals("blue")) {
 
                     LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, 63.00, Math.toRadians(270.00)))
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .splineTo(new Vector2d(48.00, 43.00), Math.toRadians(360.00))
+                            .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                             .lineToSplineHeading(new Pose2d(31.00, 36.00, Math.toRadians(180.00)))
-                            .lineToSplineHeading(new Pose2d(36.00, 60.00, Math.toRadians(359.43)))
-                            .splineTo(new Vector2d(61.00, 60.00), Math.toRadians(360.00))
+                            .addDisplacementMarker(0.45, 0, () -> clawControl.toggleArm())
+                            .addDisplacementMarker(() -> clawControl.openInsideClaw())
+                            .lineToSplineHeading(new Pose2d(36.00, 60.00, Math.toRadians(360)))
+                            .lineTo(new Vector2d(61.00, 60.00))
                             .build();
 
                     MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, 63.00, Math.toRadians(270.00)))
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .splineTo(new Vector2d(48.00, 36.00), Math.toRadians(360.00))
+                            .addDisplacementMarker(() -> clawControl.openOutsideClaw())
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .lineToLinearHeading(new Pose2d(23.00, 25.00, Math.toRadians(180.00)))
+                            .addDisplacementMarker(() -> clawControl.openInsideClaw())
                             .lineToLinearHeading(new Pose2d(36.00, 60.00, Math.toRadians(360.00)))
                             .splineTo(new Vector2d(61.00, 60.00), Math.toRadians(360.00))
                             .build();
 
-                    MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, 63.00, Math.toRadians(270.00)))
+                    RightAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, 63.00, Math.toRadians(270.00)))
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .splineTo(new Vector2d(48.00, 36.00), Math.toRadians(360.00))
-                            .lineToLinearHeading(new Pose2d(23.00, 25.00, Math.toRadians(180.00)))
+                            .addDisplacementMarker(() -> clawControl.openOutsideClaw())
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
+                            .lineToLinearHeading(new Pose2d(23.00, 30.00, Math.toRadians(180.00)))
+                            .addDisplacementMarker(() -> clawControl.openInsideClaw())
                             .lineToLinearHeading(new Pose2d(36.00, 60.00, Math.toRadians(360.00)))
                             .splineTo(new Vector2d(61.00, 60.00), Math.toRadians(360.00))
                             .build();
@@ -120,28 +137,40 @@ public class tfodRR extends LinearOpMode {
 
                     LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(-35.00, -63.00, Math.toRadians(90.00)))
                             .splineTo(new Vector2d(-47.00, -42.00), Math.toRadians(90.00))
+                            .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                             .lineTo(new Vector2d(-36.00, -42.00))
                             .splineTo(new Vector2d(-36.00, -13.00), Math.toRadians(90.00))
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .lineTo(new Vector2d(11.00, -13.00))
                             .lineToSplineHeading(new Pose2d(48.00, -30.00, Math.toRadians(2.44)))
+                            .addDisplacementMarker(() -> clawControl.openInsideClaw())
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .lineTo(new Vector2d(43.00, -13.00))
                             .splineTo(new Vector2d(61.00, -13.00), Math.toRadians(0.37))
                             .build();
 
                     MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(-35.00, -63.00, Math.toRadians(90.00)))
                             .splineTo(new Vector2d(-47.00, -25.00), Math.toRadians(0.00))
+                            .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                             .lineToSplineHeading(new Pose2d(-53.00, -13.00, Math.toRadians(90.00)))
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .lineTo(new Vector2d(11.00, -13.00))
                             .lineToSplineHeading(new Pose2d(48.00, -36.00, Math.toRadians(0.00)))
+                            .addDisplacementMarker(() -> clawControl.openInsideClaw())
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .lineTo(new Vector2d(43.00, -13.00))
                             .splineTo(new Vector2d(61.00, -13.00), Math.toRadians(0.00))
                             .build();
 
-                    MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(-35.00, -63.00, Math.toRadians(90.00)))
+                    RightAuto = drive.trajectorySequenceBuilder(new Pose2d(-35.00, -63.00, Math.toRadians(90.00)))
                             .splineTo(new Vector2d(-47.00, -25.00), Math.toRadians(0.00))
+                            .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                             .lineToSplineHeading(new Pose2d(-53.00, -13.00, Math.toRadians(90.00)))
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .lineTo(new Vector2d(11.00, -13.00))
                             .lineToSplineHeading(new Pose2d(48.00, -36.00, Math.toRadians(0.00)))
+                            .addDisplacementMarker(() -> clawControl.openInsideClaw())
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .lineTo(new Vector2d(43.00, -13.00))
                             .splineTo(new Vector2d(61.00, -13.00), Math.toRadians(0.00))
                             .build();
@@ -152,28 +181,40 @@ public class tfodRR extends LinearOpMode {
 
                     LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(-35.00, 63.00, Math.toRadians(270.00)))
                             .splineTo(new Vector2d(-32.00, 36.00), Math.toRadians(360.00))
+                            .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                             .lineToSplineHeading(new Pose2d(-53.00, 13.00, Math.toRadians(270.00)))
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .lineTo(new Vector2d(11.00, 13.00))
                             .lineToSplineHeading(new Pose2d(48.00, 43.00, Math.toRadians(360.00)))
+                            .addDisplacementMarker(() -> clawControl.openInsideClaw())
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .lineTo(new Vector2d(43.00, 13.00))
                             .splineTo(new Vector2d(61.00, 13.00), Math.toRadians(360.00))
                             .build();
 
                     MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(-35.00, 63.00, Math.toRadians(270.00)))
                             .splineTo(new Vector2d(-47.00, 25.00), Math.toRadians(360.00))
+                            .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                             .lineToSplineHeading(new Pose2d(-53.00, 13.00, Math.toRadians(270.00)))
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .lineTo(new Vector2d(11.00, 13.00))
                             .lineToSplineHeading(new Pose2d(48.00, 36.00, Math.toRadians(360.00)))
+                            .addDisplacementMarker(() -> clawControl.openInsideClaw())
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .lineTo(new Vector2d(43.00, 13.00))
                             .splineTo(new Vector2d(61.00, 13.00), Math.toRadians(360.00))
                             .build();
 
                     RightAuto = drive.trajectorySequenceBuilder(new Pose2d(-35.00, 63.00, Math.toRadians(270.00)))
                             .splineTo(new Vector2d(-47.00, 42.00), Math.toRadians(270.00))
+                            .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                             .lineTo(new Vector2d(-36.00, 42.00))
                             .splineTo(new Vector2d(-36.00, 13.00), Math.toRadians(270.00))
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .lineTo(new Vector2d(11.00, 13.00))
                             .lineToSplineHeading(new Pose2d(48.00, 30.00, Math.toRadians(357.56)))
+                            .addDisplacementMarker(() -> clawControl.openInsideClaw())
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .lineTo(new Vector2d(43.00, 13.00))
                             .splineTo(new Vector2d(61.00, 13.00), Math.toRadians(359.63))
                             .build();

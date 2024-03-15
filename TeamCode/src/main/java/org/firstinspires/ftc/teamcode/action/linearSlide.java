@@ -32,6 +32,7 @@ public class linearSlide {
         touchSensor = hardwareMap.get(DigitalChannel.class, "Touch Sensor");
         touchSensor.setMode(DigitalChannel.Mode.INPUT);
         mR.setDirection(DcMotorSimple.Direction.REVERSE);
+        mL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
     public void setPower(double slidePowerInput) {
         slidePower = slidePowerInput * totalPower * -1;
@@ -47,7 +48,6 @@ public class linearSlide {
 
     public void telemetryOutput() {
         telemetry.addData("Slide power: ", df.format(slidePower));
-        telemetry.addData("Left slide position: ", df.format(mL.getCurrentPosition()));
         telemetry.addData("Right slide position: ", df.format(mR.getCurrentPosition()));
         telemetry.addData("Sensor pressed", touchSensorPressed());
     }
@@ -57,5 +57,15 @@ public class linearSlide {
         mR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         mL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         mR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
+    public void startSlide() {
+        mL.setPower(-0.5);
+        mR.setPower(-0.5);
+    }
+
+    public void stopSlide() {
+        mL.setPower(-0.06);
+        mR.setPower(-0.06);
     }
 }
