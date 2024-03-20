@@ -33,7 +33,6 @@ public class linearSlide {
         touchSensor = hardwareMap.get(DigitalChannel.class, "Touch Sensor");
         touchSensor.setMode(DigitalChannel.Mode.INPUT);
         mR.setDirection(DcMotorSimple.Direction.REVERSE);
-        mL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     /**
@@ -73,26 +72,45 @@ public class linearSlide {
     }
 
     /**
-     * Starts the slides moving upward in our roadrunner autonomous.
+     * Starts the right slide moving upward in our roadrunner autonomous.
      */
-    public void startSlideUp() {
-        mL.setPower(0.5);
-        mR.setPower(0.5);
+    public void startRightSlideUp() {
+        mR.setPower(-0.2);
     }
 
     /**
-     * Starts the slides moving downward in our roadrunner autonomous.
+     * Starts the left slide moving upward in our roadrunner autonomous
      */
-    public void startSlidesDown() {
-        mL.setPower(-0.5);
-        mR.setPower(-0.5);
+    public void startLeftSlideUp() {
+        mL.setPower(-0.2);
     }
 
     /**
-     * Stops the slides and holds them in the position they are at.
+     * Starts the right slide moving downward in our roadrunner autonomous.
      */
-    public void stopSlide() {
-        mL.setPower(0.06);
-        mR.setPower(0.06);
+    public void startSlidesRightDown() {
+        mR.setPower(0.2);
+    }
+
+    /**
+     * Starts the left slide moving downward in our roadrunner autonomous
+     */
+
+    public void startSlidesLeftDown() {
+        mL.setPower(0.2);
+    }
+
+    /**
+     * Stops the right slide and holds in in the position it is at
+     */
+    public void stopSlideRight() {
+        mR.setPower(-0.06);
+    }
+
+    /**
+     * Stops the left slide and holds it in the position it is at.
+     */
+    public void stopSlideLeft() {
+        mL.setPower(-0.06);
     }
 }

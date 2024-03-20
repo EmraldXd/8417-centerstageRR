@@ -36,11 +36,12 @@ public class tfodRR extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        linearSlide.init(this);
-        clawControl.init(this);
-        tfSetup.init(this);
-
-        drive = new SampleMecanumDrive(hardwareMap);
+        if (opModeInInit()){
+            linearSlide.init(this);
+            clawControl.init(this);
+            tfSetup.init(this);
+            drive = new SampleMecanumDrive(hardwareMap);
+        }
         while(opModeInInit()) {
             //Player 1 sets teamColor using X and B (the blue and red button respectively)
             if(gamepad1.b) {
@@ -129,6 +130,9 @@ public class tfodRR extends LinearOpMode {
                             .addDisplacementMarker(() -> clawControl.openInsideClaw())
                             .lineToLinearHeading(new Pose2d(36.00, 60.00, Math.toRadians(360.00)))
                             .splineTo(new Vector2d(61.00, 60.00), Math.toRadians(360.00))
+                            .addDisplacementMarker(0.1, () -> {
+                                linearSlide.setPower(-0.2);
+                            })
                             .build();
 
                     drive.setPoseEstimate(LeftAuto.start());
@@ -250,6 +254,7 @@ public class tfodRR extends LinearOpMode {
             //LOOP
             telemetry.addData("Auto time elapsed: ", autoRuntime.seconds());
             telemetry.addData("Action time elapsed: ", actionRuntime.seconds());
+            linearSlide.telemetryOutput();
 
             if(propPos.equals("right") || (!propPos.equals("middle") && !propPos.equals("left"))) {
                 drive.followTrajectorySequence(RightAuto);
