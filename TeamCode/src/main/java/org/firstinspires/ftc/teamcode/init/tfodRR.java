@@ -4,6 +4,8 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.RR.drive.SampleMecanumDrive;
@@ -28,10 +30,14 @@ public class tfodRR extends LinearOpMode {
     boolean leftSide = false; //Stores the location of the prop as a string variable. Defaults to right unless told otherwise.
     boolean teamChosen = false; //Lets the robot know if the team is chosen
     boolean autoFinished = false;
+    public int robotAction = 0;
     //DECLARE NULL
-    TrajectorySequence LeftAuto;
-    TrajectorySequence MiddleAuto;
-    TrajectorySequence RightAuto;
+    TrajectorySequence LeftAutoOne;
+    TrajectorySequence LeftAutoTwo;
+    TrajectorySequence MiddleAutoOne;
+    TrajectorySequence MiddleAutoTwo;
+    TrajectorySequence RightAutoOne;
+    TrajectorySequence RightAutoTwo;
     SampleMecanumDrive drive;
 
     @Override
@@ -62,84 +68,94 @@ public class tfodRR extends LinearOpMode {
             if(teamChosen) {
                 if (!leftSide && teamColor.equals("red")) {
 
-                    LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, -63.00, Math.toRadians(90.00)))
+                    LeftAutoOne = drive.trajectorySequenceBuilder(new Pose2d(12.00, -63.00, Math.toRadians(90.00)))
                             .addDisplacementMarker(() -> clawControl.toggleArm())
                             .splineTo(new Vector2d(48.00, -30.00), Math.toRadians(0.00))
                             .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                             .lineToLinearHeading(new Pose2d(9.00, -35.00, Math.toRadians(180.00)))
-                            .addDisplacementMarker(0.45, 0, () -> clawControl.toggleArm())
-                            .addDisplacementMarker(() -> clawControl.openInsideClaw())
+                            .build();
+
+                    LeftAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(9.00, -35.00, Math.toRadians(180.00)))
                             .lineToSplineHeading(new Pose2d(36.00, -60.00, Math.toRadians(0.00)))
                             .splineTo(new Vector2d(61.00, -60.00), Math.toRadians(0.00))
                             .build();
 
-                    MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, -63.00, Math.toRadians(90.00)))
+
+                    MiddleAutoOne = drive.trajectorySequenceBuilder(new Pose2d(12.00, -63.00, Math.toRadians(90.00)))
                             .addDisplacementMarker(() -> clawControl.toggleArm())
                             .splineTo(new Vector2d(48.00, -36.00), Math.toRadians(0.00))
                             .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                             .lineToLinearHeading(new Pose2d(23.00, -25.00, Math.toRadians(180.00)))
-                            .addDisplacementMarker(0.45, 0, () -> clawControl.toggleArm())
-                            .addDisplacementMarker(() -> clawControl.openInsideClaw())
+                            .build();
+
+                    MiddleAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(23.00, -25.00, Math.toRadians(180.00)))
                             .lineToLinearHeading(new Pose2d(36.00, -60.00, Math.toRadians(0.00)))
                             .splineTo(new Vector2d(61.00, -60.00), Math.toRadians(0.00))
                             .build();
 
-                    RightAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, -63.00, Math.toRadians(90.00)))
+
+                    RightAutoOne = drive.trajectorySequenceBuilder(new Pose2d(12.00, -63.00, Math.toRadians(90.00)))
                             .addDisplacementMarker(() -> clawControl.toggleArm())
                             .splineTo(new Vector2d(48.00, -43.00), Math.toRadians(0.00))
                             .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                             .lineToSplineHeading(new Pose2d(31.00, -36.00, Math.toRadians(180.00)))
+                            .build();
+
+                    RightAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(31.00, -36.00, Math.toRadians(180.00)))
                             .addDisplacementMarker(0.45, 0, () -> clawControl.toggleArm())
                             .addDisplacementMarker(() -> clawControl.openInsideClaw())
                             .lineToSplineHeading(new Pose2d(36.00, -60.00, Math.toRadians(0.00)))
                             .splineTo(new Vector2d(61.00, -60.00), Math.toRadians(0.00))
                             .build();
 
-                    drive.setPoseEstimate(LeftAuto.start());
+                    drive.setPoseEstimate(LeftAutoOne.start());
 
                 } else if (leftSide && teamColor.equals("blue")) {
 
-                    LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, 63.00, Math.toRadians(270.00)))
+                    LeftAutoOne = drive.trajectorySequenceBuilder(new Pose2d(12.00, 63.00, Math.toRadians(270.00)))
                             .addDisplacementMarker(() -> clawControl.toggleArm())
                             .splineTo(new Vector2d(48.00, 43.00), Math.toRadians(360.00))
                             .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                             .lineToSplineHeading(new Pose2d(31.00, 36.00, Math.toRadians(180.00)))
-                            .addDisplacementMarker(0.45, 0, () -> clawControl.toggleArm())
-                            .addDisplacementMarker(() -> clawControl.openInsideClaw())
+                            .build();
+
+                    LeftAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(31.00, 36.00, Math.toRadians(180.00)))
                             .lineToSplineHeading(new Pose2d(36.00, 60.00, Math.toRadians(360)))
                             .lineTo(new Vector2d(61.00, 60.00))
                             .build();
 
-                    MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, 63.00, Math.toRadians(270.00)))
+
+                    MiddleAutoOne = drive.trajectorySequenceBuilder(new Pose2d(12.00, 63.00, Math.toRadians(270.00)))
                             .addDisplacementMarker(() -> clawControl.toggleArm())
                             .splineTo(new Vector2d(48.00, 36.00), Math.toRadians(360.00))
                             .addDisplacementMarker(() -> clawControl.openOutsideClaw())
-                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .lineToLinearHeading(new Pose2d(23.00, 25.00, Math.toRadians(180.00)))
+                            .build();
+
+                    MiddleAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(12.00, 63.00, Math.toRadians(180.00)))
                             .addDisplacementMarker(() -> clawControl.openInsideClaw())
                             .lineToLinearHeading(new Pose2d(36.00, 60.00, Math.toRadians(360.00)))
                             .splineTo(new Vector2d(61.00, 60.00), Math.toRadians(360.00))
                             .build();
 
-                    RightAuto = drive.trajectorySequenceBuilder(new Pose2d(12.00, 63.00, Math.toRadians(270.00)))
+
+                    RightAutoOne = drive.trajectorySequenceBuilder(new Pose2d(12.00, 63.00, Math.toRadians(270.00)))
                             .addDisplacementMarker(() -> clawControl.toggleArm())
                             .splineTo(new Vector2d(48.00, 36.00), Math.toRadians(360.00))
                             .addDisplacementMarker(() -> clawControl.openOutsideClaw())
-                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .lineToLinearHeading(new Pose2d(23.00, 30.00, Math.toRadians(180.00)))
-                            .addDisplacementMarker(() -> clawControl.openInsideClaw())
-                            .lineToLinearHeading(new Pose2d(36.00, 60.00, Math.toRadians(360.00)))
-                            .splineTo(new Vector2d(61.00, 60.00), Math.toRadians(360.00))
-                            .addDisplacementMarker(0.1, () -> {
-                                linearSlide.setPower(-0.2);
-                            })
                             .build();
 
-                    drive.setPoseEstimate(LeftAuto.start());
+                    RightAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(23.00, 30.00, Math.toRadians(180.00)))
+                            .lineToLinearHeading(new Pose2d(36.00, 60.00, Math.toRadians(360.00)))
+                            .splineTo(new Vector2d(61.00, 60.00), Math.toRadians(360.00))
+                            .build();
+
+                    drive.setPoseEstimate(LeftAutoOne.start());
 
                 } else if (leftSide && teamColor.equals("red")) {
 
-                    LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(-35.00, -63.00, Math.toRadians(90.00)))
+                    LeftAutoOne = drive.trajectorySequenceBuilder(new Pose2d(-35.00, -63.00, Math.toRadians(90.00)))
                             .splineTo(new Vector2d(-47.00, -42.00), Math.toRadians(90.00))
                             .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                             .lineTo(new Vector2d(-36.00, -42.00))
@@ -153,7 +169,7 @@ public class tfodRR extends LinearOpMode {
                             .splineTo(new Vector2d(61.00, -13.00), Math.toRadians(0.37))
                             .build();
 
-                    MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(-35.00, -63.00, Math.toRadians(90.00)))
+                    MiddleAutoOne = drive.trajectorySequenceBuilder(new Pose2d(-35.00, -63.00, Math.toRadians(90.00)))
                             .splineTo(new Vector2d(-47.00, -25.00), Math.toRadians(0.00))
                             .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                             .lineToSplineHeading(new Pose2d(-53.00, -13.00, Math.toRadians(90.00)))
@@ -166,7 +182,7 @@ public class tfodRR extends LinearOpMode {
                             .splineTo(new Vector2d(61.00, -13.00), Math.toRadians(0.00))
                             .build();
 
-                    RightAuto = drive.trajectorySequenceBuilder(new Pose2d(-35.00, -63.00, Math.toRadians(90.00)))
+                    RightAutoOne = drive.trajectorySequenceBuilder(new Pose2d(-35.00, -63.00, Math.toRadians(90.00)))
                             .splineTo(new Vector2d(-47.00, -25.00), Math.toRadians(0.00))
                             .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                             .lineToSplineHeading(new Pose2d(-53.00, -13.00, Math.toRadians(90.00)))
@@ -179,11 +195,11 @@ public class tfodRR extends LinearOpMode {
                             .splineTo(new Vector2d(61.00, -13.00), Math.toRadians(0.00))
                             .build();
 
-                    drive.setPoseEstimate(LeftAuto.start());
+                    drive.setPoseEstimate(LeftAutoOne.start());
 
                 } else if (!leftSide && teamColor.equals("blue")) {
 
-                    LeftAuto = drive.trajectorySequenceBuilder(new Pose2d(-35.00, 63.00, Math.toRadians(270.00)))
+                    LeftAutoOne = drive.trajectorySequenceBuilder(new Pose2d(-35.00, 63.00, Math.toRadians(270.00)))
                             .splineTo(new Vector2d(-32.00, 36.00), Math.toRadians(360.00))
                             .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                             .lineToSplineHeading(new Pose2d(-53.00, 13.00, Math.toRadians(270.00)))
@@ -196,7 +212,7 @@ public class tfodRR extends LinearOpMode {
                             .splineTo(new Vector2d(61.00, 13.00), Math.toRadians(360.00))
                             .build();
 
-                    MiddleAuto = drive.trajectorySequenceBuilder(new Pose2d(-35.00, 63.00, Math.toRadians(270.00)))
+                    MiddleAutoOne = drive.trajectorySequenceBuilder(new Pose2d(-35.00, 63.00, Math.toRadians(270.00)))
                             .splineTo(new Vector2d(-47.00, 25.00), Math.toRadians(360.00))
                             .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                             .lineToSplineHeading(new Pose2d(-53.00, 13.00, Math.toRadians(270.00)))
@@ -209,7 +225,7 @@ public class tfodRR extends LinearOpMode {
                             .splineTo(new Vector2d(61.00, 13.00), Math.toRadians(360.00))
                             .build();
 
-                    RightAuto = drive.trajectorySequenceBuilder(new Pose2d(-35.00, 63.00, Math.toRadians(270.00)))
+                    RightAutoOne = drive.trajectorySequenceBuilder(new Pose2d(-35.00, 63.00, Math.toRadians(270.00)))
                             .splineTo(new Vector2d(-47.00, 42.00), Math.toRadians(270.00))
                             .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                             .lineTo(new Vector2d(-36.00, 42.00))
@@ -223,7 +239,7 @@ public class tfodRR extends LinearOpMode {
                             .splineTo(new Vector2d(61.00, 13.00), Math.toRadians(359.63))
                             .build();
 
-                    drive.setPoseEstimate(LeftAuto.start());
+                    drive.setPoseEstimate(LeftAutoOne.start());
 
                 }
                 if(teamColor.equals("red")) {
@@ -256,17 +272,64 @@ public class tfodRR extends LinearOpMode {
             telemetry.addData("Action time elapsed: ", actionRuntime.seconds());
             linearSlide.telemetryOutput();
 
-            if(propPos.equals("right") || (!propPos.equals("middle") && !propPos.equals("left"))) {
-                drive.followTrajectorySequence(RightAuto);
+            if(propPos.equals("right") || (!propPos.equals("middle") && !propPos.equals("left")) && ((!leftSide && teamColor.equals("red")) || (leftSide && teamColor.equals("blue")))) {
+                if(actionRuntime.time() <= 1.0 && robotAction == 0) {
+                    linearSlide.setPower(-0.15);
+                } else if (actionRuntime.time() >= 1.00 && robotAction == 0){
+                    setRobotAction(0);
+                    linearSlide.setPower(0);
+                    drive.followTrajectorySequence(RightAutoOne);
+                    clawControl.toggleArm();
+                    actionRuntime.reset();
+                }
+                if(actionRuntime.time() <= 1.0 && robotAction == 1) {
+                    linearSlide.setPower(0.15);
+                } else if (actionRuntime.time() >= 0.75 && robotAction == 1) {
+                    linearSlide.setPower(0);
+                    clawControl.openInsideClaw();
+                    drive.followTrajectorySequence(RightAutoTwo);
+                }
             }
 
-            if(propPos.equals("middle")) {
-                drive.followTrajectorySequence(MiddleAuto);
+            if(propPos.equals("middle") && ((!leftSide && teamColor.equals("red")) || (leftSide && teamColor.equals("blue")))) {
+                while(actionRuntime.time() <= 0.50) {
+                    linearSlide.startRightSlideUp();
+                    linearSlide.startLeftSlideUp();
+                }
+                linearSlide.stopSlideRight();
+                linearSlide.stopSlideLeft();
+                drive.followTrajectorySequence(MiddleAutoOne);
+                clawControl.toggleArm();
+                actionRuntime.reset();
+                while(actionRuntime.time() <= 0.50) {
+                    linearSlide.setPower(0.2);
+                }
+                linearSlide.setPower(0);
+                clawControl.openInsideClaw();
+                drive.followTrajectorySequence(MiddleAutoTwo);
             }
 
-            if(propPos.equals("left")) {
-                drive.followTrajectorySequence(LeftAuto);
+            if(propPos.equals("left") && ((!leftSide && teamColor.equals("red")) || (leftSide && teamColor.equals("blue")))) {
+                while(actionRuntime.time() <= 0.50) {
+                    linearSlide.setPower(-0.2);
+                }
+                linearSlide.setPower(-0.06);
+                drive.followTrajectorySequence(LeftAutoOne);
+                clawControl.toggleArm();
+                actionRuntime.reset();
+                while(actionRuntime.time() <= 0.50) {
+                    linearSlide.setPower(0.2);
+                }
+                linearSlide.setPower(-0.06);
+                clawControl.openInsideClaw();
+                drive.followTrajectorySequence(LeftAutoTwo);
             }
+        }
+    }
+
+    public void setRobotAction(int previousAction) {
+        if(robotAction != previousAction) {
+            robotAction++;
         }
     }
 }

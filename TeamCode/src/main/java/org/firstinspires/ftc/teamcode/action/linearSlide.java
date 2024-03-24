@@ -75,7 +75,7 @@ public class linearSlide {
      * Starts the right slide moving upward in our roadrunner autonomous.
      */
     public void startRightSlideUp() {
-        mR.setPower(-0.2);
+        mR.setPower(-0.4);
     }
 
     /**
