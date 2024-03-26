@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.init;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -14,6 +15,7 @@ import org.firstinspires.ftc.teamcode.action.clawControl;
 import org.firstinspires.ftc.teamcode.action.linearSlide;
 import org.firstinspires.ftc.teamcode.other.tfSetup;
 
+@Disabled
 @Autonomous(name = "roadRunner")
 public class tfodRR extends LinearOpMode {
     //CONSTRUCT
@@ -324,12 +326,23 @@ public class tfodRR extends LinearOpMode {
                 clawControl.openInsideClaw();
                 drive.followTrajectorySequence(LeftAutoTwo);
             }
+            telemetry.update();
         }
     }
 
     public void setRobotAction(int previousAction) {
         if(robotAction != previousAction) {
             robotAction++;
+        }
+    }
+
+    public void moveSlidesForTime(double time, double power) {
+        double slidePower = power * -1;
+        linearSlide.setPower(slidePower);
+        if(actionRuntime.time() >= time) {
+            robotAction++;
+            actionRuntime.reset();
+            linearSlide.setPower(-0.05);
         }
     }
 }

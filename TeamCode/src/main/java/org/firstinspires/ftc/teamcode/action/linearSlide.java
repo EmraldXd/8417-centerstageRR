@@ -57,6 +57,8 @@ public class linearSlide {
 
     public void telemetryOutput() {
         telemetry.addData("Slide power: ", df.format(slidePower));
+        telemetry.addData("Right Slide Power: ", df.format(mR.getPower()));
+        telemetry.addData("Left Slide Power: ", df.format(mL.getPower()));
         telemetry.addData("Right slide position: ", df.format(mR.getCurrentPosition()));
         telemetry.addData("Sensor pressed", touchSensorPressed());
     }
@@ -112,5 +114,13 @@ public class linearSlide {
      */
     public void stopSlideLeft() {
         mL.setPower(-0.06);
+    }
+
+    public void setAutoPower(double slidePowerInput) {
+        slidePower = slidePowerInput * totalPower;
+        if(!(touchSensorPressed() && slidePower > 0) && !(mR.getCurrentPosition() > 2700 && slidePower > 0)){
+            mL.setPower(slidePower * .5);
+            mR.setPower(slidePower);
+        }
     }
 }
