@@ -33,10 +33,13 @@ public class tfodLoopRR extends OpMode {
     //DECLARE NULL
     TrajectorySequence LeftAutoOne;
     TrajectorySequence LeftAutoTwo;
+    TrajectorySequence LeftAutoThree;
     TrajectorySequence MiddleAutoOne;
     TrajectorySequence MiddleAutoTwo;
+    TrajectorySequence MiddleAutoThree;
     TrajectorySequence RightAutoOne;
     TrajectorySequence RightAutoTwo;
+    TrajectorySequence RightAutoThree;
     SampleMecanumDrive drive;
 
     @Override
@@ -187,12 +190,17 @@ public class tfodLoopRR extends OpMode {
                         .splineTo(new Vector2d(-36.00, -13.00), Math.toRadians(90.00))
                         .addDisplacementMarker(() -> clawControl.toggleArm())
                         .lineTo(new Vector2d(11.00, -13.00))
-                        .lineToSplineHeading(new Pose2d(48.00, -30.00, Math.toRadians(2.44)))
                         .build();
 
-                        LeftAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(48.00, -30.00, Math.toRadians(2.44)))
+                LeftAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(11.00, 13.00, Math.toRadians(90.00)))
+                        .lineToSplineHeading(new Pose2d(48.00, -30.00, Math.toRadians(2.44)))
+                        .addDisplacementMarker(this::addRobotAction)
+                        .build();
+
+                LeftAutoThree = drive.trajectorySequenceBuilder(new Pose2d(48.00, -30.00, Math.toRadians(2.44)))
                         .lineTo(new Vector2d(43.00, -13.00))
                         .splineTo(new Vector2d(61.00, -13.00), Math.toRadians(0.37))
+                        .addDisplacementMarker(this::addRobotAction)
                         .build();
 
 
@@ -202,12 +210,17 @@ public class tfodLoopRR extends OpMode {
                         .lineToSplineHeading(new Pose2d(-53.00, -13.00, Math.toRadians(90.00)))
                         .addDisplacementMarker(() -> clawControl.toggleArm())
                         .lineTo(new Vector2d(11.00, -13.00))
-                        .lineToSplineHeading(new Pose2d(48.00, -36.00, Math.toRadians(0.00)))
                         .build();
 
-                MiddleAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(-35.00, -63.00, Math.toRadians(0.00)))
+                MiddleAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(-35.00, -63.00, Math.toRadians(90.00)))
+                        .lineToSplineHeading(new Pose2d(48.00, -36.00, Math.toRadians(0.00)))
+                        .addDisplacementMarker(this::addRobotAction)
+                        .build();
+
+                MiddleAutoThree = drive.trajectorySequenceBuilder(new Pose2d(-35.00, -63.00, Math.toRadians(0.00)))
                         .lineTo(new Vector2d(43.00, -13.00))
                         .splineTo(new Vector2d(61.00, -13.00), Math.toRadians(0.00))
+                        .addDisplacementMarker(this::addRobotAction)
                         .build();
 
 
@@ -217,12 +230,17 @@ public class tfodLoopRR extends OpMode {
                         .lineToSplineHeading(new Pose2d(-53.00, -13.00, Math.toRadians(90.00)))
                         .addDisplacementMarker(() -> clawControl.toggleArm())
                         .lineTo(new Vector2d(11.00, -13.00))
-                        .lineToSplineHeading(new Pose2d(48.00, -36.00, Math.toRadians(0.00)))
                         .build();
 
-                RightAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(48.00, -36.00, Math.toRadians(0.00)))
+                RightAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(-35.00, -63.00, Math.toRadians(90.00)))
+                        .lineToSplineHeading(new Pose2d(48.00, -36.00, Math.toRadians(0.00)))
+                        .addDisplacementMarker(this::addRobotAction)
+                        .build();
+
+                RightAutoThree = drive.trajectorySequenceBuilder(new Pose2d(48.00, -36.00, Math.toRadians(0.00)))
                         .lineTo(new Vector2d(43.00, -13.00))
                         .splineTo(new Vector2d(61.00, -13.00), Math.toRadians(0.00))
+                        .addDisplacementMarker(this::addRobotAction)
                         .build();
 
                 drive.setPoseEstimate(LeftAutoOne.start());
@@ -236,12 +254,17 @@ public class tfodLoopRR extends OpMode {
                         .lineToSplineHeading(new Pose2d(-53.00, 13.00, Math.toRadians(270.00)))
                         .addDisplacementMarker(() -> clawControl.toggleArm())
                         .lineTo(new Vector2d(11.00, 13.00))
+                        .addDisplacementMarker(this::addRobotAction)
+                        .build();
+
+                LeftAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(-53.00, 13.00, Math.toRadians(270.00)))
                         .lineToSplineHeading(new Pose2d(48.00, 43.00, Math.toRadians(360.00)))
                         .build();
 
-                LeftAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(48.00, 43.00, Math.toRadians(360.00)))
+                LeftAutoThree = drive.trajectorySequenceBuilder(new Pose2d(48.00, 43.00, Math.toRadians(360.00)))
                         .lineTo(new Vector2d(43.00, 13.00))
                         .splineTo(new Vector2d(61.00, 13.00), Math.toRadians(360.00))
+                        .addDisplacementMarker(this::addRobotAction)
                         .build();
 
                 MiddleAutoOne = drive.trajectorySequenceBuilder(new Pose2d(-35.00, 63.00, Math.toRadians(270.00)))
@@ -250,12 +273,18 @@ public class tfodLoopRR extends OpMode {
                         .lineToSplineHeading(new Pose2d(-53.00, 13.00, Math.toRadians(270.00)))
                         .addDisplacementMarker(() -> clawControl.toggleArm())
                         .lineTo(new Vector2d(11.00, 13.00))
-                        .lineToSplineHeading(new Pose2d(48.00, 36.00, Math.toRadians(360.00)))
+                        .addDisplacementMarker(this::addRobotAction)
                         .build();
 
-                MiddleAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(48.00, 36.00, Math.toRadians(360.00)))
+                MiddleAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(53.00, 13.00, Math.toRadians(270.00)))
+                        .lineToSplineHeading(new Pose2d(48.00, 36.00, Math.toRadians(360.00)))
+                        .addDisplacementMarker(this::addRobotAction)
+                        .build();
+
+                MiddleAutoThree = drive.trajectorySequenceBuilder(new Pose2d(48.00, 36.00, Math.toRadians(360.00)))
                         .lineTo(new Vector2d(43.00, 13.00))
                         .splineTo(new Vector2d(61.00, 13.00), Math.toRadians(360.00))
+                        .addDisplacementMarker(this::addRobotAction)
                         .build();
 
                 RightAutoOne = drive.trajectorySequenceBuilder(new Pose2d(-35.00, 63.00, Math.toRadians(270.00)))
@@ -265,12 +294,17 @@ public class tfodLoopRR extends OpMode {
                         .splineTo(new Vector2d(-36.00, 13.00), Math.toRadians(270.00))
                         .addDisplacementMarker(() -> clawControl.toggleArm())
                         .lineTo(new Vector2d(11.00, 13.00))
-                        .lineToSplineHeading(new Pose2d(48.00, 30.00, Math.toRadians(357.56)))
                         .build();
 
-                RightAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(48.00, 30.00, Math.toRadians(357.56)))
+                RightAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(-36.00, 13.00, Math.toRadians(270.00)))
+                        .lineToSplineHeading(new Pose2d(48.00, 30.00, Math.toRadians(357.56)))
+                        .addDisplacementMarker(this::addRobotAction)
+                        .build();
+
+                RightAutoThree = drive.trajectorySequenceBuilder(new Pose2d(48.00, 30.00, Math.toRadians(357.56)))
                         .lineTo(new Vector2d(43.00, 13.00))
                         .splineTo(new Vector2d(61.00, 13.00), Math.toRadians(359.63))
+                        .addDisplacementMarker(this::addRobotAction)
                         .build();
 
                 drive.setPoseEstimate(LeftAutoOne.start());
@@ -372,43 +406,69 @@ public class tfodLoopRR extends OpMode {
         if (!backdropSide) {
             if (propPos.equals("right") || !(propPos.equals("middle") || propPos.equals("left"))) {
                 if (robotAction == 0) {
+                    moveSlidesForTime(0.5, 0.75);
+                } else if (robotAction == 1) {
                     drive.followTrajectorySequence(RightAutoOne);
                     robotAction++;
-                } else if (robotAction == 1) {
+                } else if (robotAction == 2) {
                     actionRuntime.reset();
-                } else if (robotAction == 2 && autoFinished) {
-                    moveSlidesForTime(0.9, -0.75);
                 } else if (robotAction == 3) {
-                    clawControl.openInsideClaw();
+                    moveSlidesForTime(1, 0.75);
+                } else if (robotAction == 4) {
+                    waitThenGoToNextAction(0.2);
+                } else if (robotAction == 5) {
                     drive.followTrajectorySequence(RightAutoTwo);
+                    robotAction++;
+                }  else if (robotAction == 6) {
+                    actionRuntime.reset();
+                } else if (robotAction == 7) {
+                    clawControl.openInsideClaw();
+                    drive.followTrajectorySequence(RightAutoThree);
+                    robotAction++;
                 }
 
-                if (propPos.equals("middle")) {
-                    if (robotAction == 0) {
-                        drive.followTrajectorySequence(MiddleAutoOne);
-                        robotAction++;
-                    } else if (robotAction == 1) {
-                        actionRuntime.reset();
-                    } else if (robotAction == 2 && autoFinished) {
-                        moveSlidesForTime(0.5, 0.75);
-                    } else if (robotAction == 3) {
-                        clawControl.openInsideClaw();
-                        drive.followTrajectorySequence(MiddleAutoTwo);
-                    }
+                if (robotAction == 0) {
+                    moveSlidesForTime(0.5, 0.75);
+                } else if (robotAction == 1) {
+                    drive.followTrajectorySequence(MiddleAutoOne);
+                    robotAction++;
+                } else if (robotAction == 2) {
+                    actionRuntime.reset();
+                } else if (robotAction == 3) {
+                    moveSlidesForTime(1, 0.75);
+                } else if (robotAction == 4) {
+                    waitThenGoToNextAction(0.2);
+                } else if (robotAction == 5) {
+                    drive.followTrajectorySequence(MiddleAutoTwo);
+                    robotAction++;
+                }  else if (robotAction == 6) {
+                    actionRuntime.reset();
+                } else if (robotAction == 7) {
+                    clawControl.openInsideClaw();
+                    drive.followTrajectorySequence(MiddleAutoThree);
+                    robotAction++;
                 }
 
-                if (propPos.equals("left")) {
-                    if (robotAction == 0) {
-                        drive.followTrajectorySequence(LeftAutoOne);
-                        robotAction++;
-                    } else if (robotAction == 1) {
-                        actionRuntime.reset();
-                    } else if (robotAction == 2 && autoFinished) {
-                        moveSlidesForTime(0.5, 0.75);
-                    } else if (robotAction == 3) {
-                        clawControl.openInsideClaw();
-                        drive.followTrajectorySequence(LeftAutoTwo);
-                    }
+                if (robotAction == 0) {
+                    moveSlidesForTime(0.5, 0.75);
+                } else if (robotAction == 1) {
+                    drive.followTrajectorySequence(LeftAutoOne);
+                    robotAction++;
+                } else if (robotAction == 2) {
+                    actionRuntime.reset();
+                } else if (robotAction == 3) {
+                    moveSlidesForTime(1, 0.75);
+                } else if (robotAction == 4) {
+                    waitThenGoToNextAction(0.2);
+                } else if (robotAction == 5) {
+                    drive.followTrajectorySequence(LeftAutoTwo);
+                    robotAction++;
+                }  else if (robotAction == 6) {
+                    actionRuntime.reset();
+                } else if (robotAction == 7) {
+                    clawControl.openInsideClaw();
+                    drive.followTrajectorySequence(LeftAutoThree);
+                    robotAction++;
                 }
             }
         }
