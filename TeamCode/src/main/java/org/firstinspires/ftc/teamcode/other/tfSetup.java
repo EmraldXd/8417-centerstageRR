@@ -75,9 +75,9 @@ public class tfSetup {
                 for(Recognition recognition : recognitions) {
                     if(recognition.getConfidence() > locationConfidence) {
                         locationX = (recognition.getRight() + recognition.getLeft()) / 2;
-                        if(locationX < 160) {
+                        if(locationX < 192) {
                             position = "left";
-                        } else if(locationX > 160) {
+                        } else if(locationX > 192) {
                             position = "middle";
                         }
                     }
