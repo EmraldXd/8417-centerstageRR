@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.init;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -10,6 +11,7 @@ import org.firstinspires.ftc.teamcode.action.mecanumDrive;
 import org.firstinspires.ftc.teamcode.other.apriltags;
 import org.firstinspires.ftc.teamcode.other.tfSetup;
 
+@Disabled
 @Autonomous
 public class tfodAuto extends OpMode {
     double INCHTOTIME = 1 / 6.5;

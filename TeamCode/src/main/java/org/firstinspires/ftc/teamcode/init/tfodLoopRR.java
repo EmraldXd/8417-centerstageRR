@@ -110,9 +110,9 @@ public class tfodLoopRR extends OpMode {
 
                 RightAutoOne = drive.trajectorySequenceBuilder(new Pose2d(12.00, -63.00, Math.toRadians(90.00)))
                         .addDisplacementMarker(() -> clawControl.toggleArm())
-                        .splineTo(new Vector2d(48.00, -50.00), Math.toRadians(0.00))
+                        .splineTo(new Vector2d(48.00, -47.00), Math.toRadians(0.00))
                         .addDisplacementMarker(() -> clawControl.openOutsideClaw())
-                        .lineToSplineHeading(new Pose2d(33.00, -36.00, Math.toRadians(180.00)))
+                        .lineToSplineHeading(new Pose2d(30.00, -34.00, Math.toRadians(180.00)))
                         .addDisplacementMarker(this::addRobotAction)
                         .addDisplacementMarker(this::trajectoryFinished)
                         .addDisplacementMarker(() -> actionRuntime.reset())
@@ -182,9 +182,9 @@ public class tfodLoopRR extends OpMode {
 
             } else if (leftSide && teamColor.equals("red")) {
 
-                //This auto code is NOT FINALIZED
+                //This auto code IS FINALIZED
                 LeftAutoOne = drive.trajectorySequenceBuilder(new Pose2d(-35.00, -63.00, Math.toRadians(90.00)))
-                        .splineTo(new Vector2d(-47.00, -42.00), Math.toRadians(90.00))
+                        .splineTo(new Vector2d(-47.00, -45.00), Math.toRadians(90.00))
                         .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                         .setReversed(true)
                         .splineTo(new Vector2d(-35.00, -63.00), Math.toRadians(-90.00))
@@ -208,7 +208,7 @@ public class tfodLoopRR extends OpMode {
 
 
                 MiddleAutoOne = drive.trajectorySequenceBuilder(new Pose2d(-35.00, -63.00, Math.toRadians(90.00)))
-                        .splineTo(new Vector2d(-47.00, -25.00), Math.toRadians(0.00))
+                        .splineTo(new Vector2d(-50.00, -25.00), Math.toRadians(0.00))
                         .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                         .setReversed(true)
                         .splineTo(new Vector2d(-35.00, -63.00), Math.toRadians(-90.00))
