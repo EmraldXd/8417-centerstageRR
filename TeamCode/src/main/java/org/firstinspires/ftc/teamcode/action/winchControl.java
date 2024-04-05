@@ -19,8 +19,8 @@ public class winchControl {
     static final DecimalFormat df = new DecimalFormat("0.00");
     Servo lock;
     DcMotor winch;
-    double lockPos = 0.81;
-    double unlockPos = 0.64;
+    double lockPos = 0.19;
+    double unlockPos = 0.00;
     double delay = 0.50;
     double winchPower = 1.00;
     boolean unlocked;

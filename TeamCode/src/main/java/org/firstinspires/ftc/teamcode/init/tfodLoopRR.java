@@ -95,7 +95,7 @@ public class tfodLoopRR extends OpMode {
                         .splineTo(new Vector2d(48.00, -40.00), Math.toRadians(0.00))
                         .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                         .lineTo(new Vector2d(45.00, -40.00))
-                        .lineToLinearHeading(new Pose2d(23.00, -25.00, Math.toRadians(180.00)))
+                        .lineToLinearHeading(new Pose2d(26.00, -25.00, Math.toRadians(180.00)))
                         .addDisplacementMarker(this::addRobotAction)
                         .addDisplacementMarker(this::trajectoryFinished)
                         .addDisplacementMarker(() -> actionRuntime.reset())
@@ -149,8 +149,8 @@ public class tfodLoopRR extends OpMode {
                         .addDisplacementMarker(() -> clawControl.toggleArm())
                         .splineTo(new Vector2d(48.00, 38.50), Math.toRadians(360.00))
                         .addDisplacementMarker(() -> clawControl.openOutsideClaw())
-                        .lineTo(new Vector2d(45.00, 38.50))
-                        .lineToLinearHeading(new Pose2d(22.00, 20.00, Math.toRadians(180.00)))
+                        .lineTo(new Vector2d(45.00, 36.50))
+                        .lineToLinearHeading(new Pose2d(25.00, 20.00, Math.toRadians(180.00)))
                         .addDisplacementMarker(this::trajectoryFinished)
                         .addDisplacementMarker(this::addRobotAction)
                         .addDisplacementMarker(() -> actionRuntime.reset())
@@ -358,7 +358,7 @@ public class tfodLoopRR extends OpMode {
         if (backdropSide) {
             if (propPos.equals("right") || !(propPos.equals("middle") || propPos.equals("left"))) {
                 if (robotAction == 0) {
-                    moveSlidesForTime(0.5, 0.75);
+                    moveSlidesForTime(0.5, 0.6);
                 } else if (robotAction == 1) {
                     drive.followTrajectorySequence(RightAutoOne);
                     robotAction++;
@@ -378,7 +378,7 @@ public class tfodLoopRR extends OpMode {
 
             if (propPos.equals("middle")) {
                 if (robotAction == 0) {
-                    moveSlidesForTime(0.5, 0.75);
+                    moveSlidesForTime(0.5, 0.6);
                 } else if (robotAction == 1) {
                     drive.followTrajectorySequence(MiddleAutoOne);
                     robotAction++;
@@ -398,7 +398,7 @@ public class tfodLoopRR extends OpMode {
 
             if (propPos.equals("left")) {
                 if (robotAction == 0) {
-                    moveSlidesForTime(0.5, 0.75);
+                    moveSlidesForTime(0.5, 0.6);
                 } else if (robotAction == 1) {
                     drive.followTrajectorySequence(LeftAutoOne);
                     clawControl.toggleArm();

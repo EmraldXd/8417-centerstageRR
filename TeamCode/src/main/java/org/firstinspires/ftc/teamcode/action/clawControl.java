@@ -26,8 +26,8 @@ public class clawControl {
     double closedClawIn = 0.175;
     double closedClawOut = 0.85;
     double openClawOut = 0.675;
-    double lowestPosition = 0.23;
-    double highestPosition = 0.00;
+    double lowestPosition = 1.00;
+    double highestPosition = 0.75;
     Servo las;
     Servo inClaw;
     Servo outClaw;

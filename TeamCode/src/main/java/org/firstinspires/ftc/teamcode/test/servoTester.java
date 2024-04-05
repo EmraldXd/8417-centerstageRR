@@ -11,6 +11,7 @@ public class servoTester extends OpMode {
     @Override
     public void init() {
         servo = hardwareMap.get(Servo.class, "lock");
+        servo.setPosition(1.00);
     }
 
     @Override
