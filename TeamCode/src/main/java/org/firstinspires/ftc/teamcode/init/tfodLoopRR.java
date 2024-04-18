@@ -95,6 +95,8 @@ public class tfodLoopRR extends OpMode {
                         .splineTo(new Vector2d(48.00, -40.00), Math.toRadians(0.00))
                         .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                         .lineTo(new Vector2d(45.00, -40.00))
+                        .lineToLinearHeading(new Pose2d(35.5, -32.5, Math.toRadians(90)))
+                        .addDisplacementMarker(() -> clawControl.toggleArm())
                         .lineToLinearHeading(new Pose2d(26.00, -25.00, Math.toRadians(180.00)))
                         .addDisplacementMarker(this::addRobotAction)
                         .addDisplacementMarker(this::trajectoryFinished)
@@ -150,7 +152,9 @@ public class tfodLoopRR extends OpMode {
                         .splineTo(new Vector2d(48.00, 38.50), Math.toRadians(360.00))
                         .addDisplacementMarker(() -> clawControl.openOutsideClaw())
                         .lineTo(new Vector2d(45.00, 36.50))
-                        .lineToLinearHeading(new Pose2d(25.00, 20.00, Math.toRadians(180.00)))
+                        .lineToLinearHeading(new Pose2d(35.00, 28.25, Math.toRadians(270.00)))
+                        .addDisplacementMarker(() -> clawControl.toggleArm())
+                        .lineToLinearHeading(new Pose2d(25.00, 25.00, Math.toRadians(180.00)))
                         .addDisplacementMarker(this::trajectoryFinished)
                         .addDisplacementMarker(this::addRobotAction)
                         .addDisplacementMarker(() -> actionRuntime.reset())
@@ -382,7 +386,6 @@ public class tfodLoopRR extends OpMode {
                 } else if (robotAction == 1) {
                     drive.followTrajectorySequence(MiddleAutoOne);
                     robotAction++;
-                    clawControl.toggleArm();
                 } else if (robotAction == 2) {
                     actionRuntime.reset();
                 } else if (autoFinished && robotAction == 3) {
@@ -390,7 +393,6 @@ public class tfodLoopRR extends OpMode {
                 } else if (robotAction == 4) {
                     waitThenGoToNextAction(0.2);
                 } else if (robotAction == 5) {
-                    clawControl.openInsideClaw();
                     drive.followTrajectorySequence(MiddleAutoTwo);
                     robotAction++;
                 }

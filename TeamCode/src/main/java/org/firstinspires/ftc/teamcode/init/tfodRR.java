@@ -87,6 +87,8 @@ public class tfodRR extends LinearOpMode {
                             .addDisplacementMarker(() -> clawControl.toggleArm())
                             .splineTo(new Vector2d(48.00, -36.00), Math.toRadians(0.00))
                             .addDisplacementMarker(() -> clawControl.openOutsideClaw())
+                            .lineToLinearHeading(new Pose2d(34.5, -30.5, Math.toRadians(90.00)))
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .lineToLinearHeading(new Pose2d(23.00, -25.00, Math.toRadians(180.00)))
                             .build();
 
@@ -131,6 +133,8 @@ public class tfodRR extends LinearOpMode {
                             .addDisplacementMarker(() -> clawControl.toggleArm())
                             .splineTo(new Vector2d(48.00, 36.00), Math.toRadians(360.00))
                             .addDisplacementMarker(() -> clawControl.openOutsideClaw())
+                            .lineToLinearHeading(new Pose2d(35.5, 30.5, Math.toRadians(270.00)))
+                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .lineToLinearHeading(new Pose2d(23.00, 25.00, Math.toRadians(180.00)))
                             .build();
 
@@ -179,7 +183,6 @@ public class tfodRR extends LinearOpMode {
                             .lineTo(new Vector2d(11.00, -13.00))
                             .lineToSplineHeading(new Pose2d(48.00, -36.00, Math.toRadians(0.00)))
                             .addDisplacementMarker(() -> clawControl.openInsideClaw())
-                            .addDisplacementMarker(() -> clawControl.toggleArm())
                             .lineTo(new Vector2d(43.00, -13.00))
                             .splineTo(new Vector2d(61.00, -13.00), Math.toRadians(0.00))
                             .build();
@@ -307,7 +310,6 @@ public class tfodRR extends LinearOpMode {
                     linearSlide.setPower(0.2);
                 }
                 linearSlide.setPower(0);
-                clawControl.openInsideClaw();
                 drive.followTrajectorySequence(MiddleAutoTwo);
             }
 
