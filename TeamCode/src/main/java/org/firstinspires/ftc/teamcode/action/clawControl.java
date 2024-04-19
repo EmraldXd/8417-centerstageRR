@@ -24,7 +24,7 @@ public class clawControl {
     //Outside Claw is ACTUALLY the inside claw, and vice versa
     double openClawIn = 0.01;
     double closedClawIn = 0.175;
-    double closedClawOut = 0.85;
+    double closedClawOut = 0.875;
     double openClawOut = 0.675;
     double lowestPosition = 1.00;
     double highestPosition = 0.75;

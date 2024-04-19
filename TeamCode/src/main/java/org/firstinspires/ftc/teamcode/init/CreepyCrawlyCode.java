@@ -12,8 +12,8 @@ import org.firstinspires.ftc.teamcode.action.clawControl;
 import org.firstinspires.ftc.teamcode.action.linearSlide;
 import org.firstinspires.ftc.teamcode.other.tfSetup;
 
-@Autonomous (name = "roadRunnerAuto")
-public class tfodLoopRR extends OpMode {
+@Autonomous (name = "CreepyCrawlyCode")
+public class CreepyCrawlyCode extends OpMode {
     //CONSTRUCT
     org.firstinspires.ftc.teamcode.other.tfSetup tfSetup = new tfSetup();
     org.firstinspires.ftc.teamcode.action.linearSlide linearSlide = new linearSlide();
@@ -85,8 +85,8 @@ public class tfodLoopRR extends OpMode {
                         .build();
 
                 LeftAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(7.50, -40.00, Math.toRadians(180.00)))
-                        .lineToSplineHeading(new Pose2d(36.00, -60.00, Math.toRadians(0.00)))
-                        .lineTo(new Vector2d(61.00, -60.00))
+                        .lineToSplineHeading(new Pose2d(36.00, -10.00, Math.toRadians(0.00)))
+                        .splineTo(new Vector2d(61.00, -10.00), Math.toRadians(0.00))
                         .build();
 
 
@@ -106,8 +106,8 @@ public class tfodLoopRR extends OpMode {
 
                 MiddleAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(23.00, -25.00, Math.toRadians(180.00)))
                         .lineTo(new Vector2d(28, -25))
-                        .lineToLinearHeading(new Pose2d(36.00, -60.00, Math.toRadians(0.00)))
-                        .splineTo(new Vector2d(61.00, -60.00), Math.toRadians(0.00))
+                        .lineToLinearHeading(new Pose2d(36.00, -10.00, Math.toRadians(0.00)))
+                        .splineTo(new Vector2d(61.00, -10.00), Math.toRadians(0.00))
                         .build();
 
 
@@ -123,8 +123,8 @@ public class tfodLoopRR extends OpMode {
 
                 RightAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(31.00, -36.00, Math.toRadians(180.00)))
                         .lineTo(new Vector2d(37.00, -36.00))
-                        .lineToSplineHeading(new Pose2d(36.00, -60.00, Math.toRadians(0.00)))
-                        .lineTo(new Vector2d(61.00, -60.00))
+                        .lineToSplineHeading(new Pose2d(36.00, -10.00, Math.toRadians(0.00)))
+                        .splineTo(new Vector2d(61.00, -10.00), Math.toRadians(0.00))
                         .build();
 
                 drive.setPoseEstimate(LeftAutoOne.start());
