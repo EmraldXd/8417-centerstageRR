@@ -143,8 +143,8 @@ public class CreepyCrawlyCode extends OpMode {
                         .build();
 
                 LeftAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(31.00, 30.00, Math.toRadians(180.00)))
-                        .lineToSplineHeading(new Pose2d(36.00, 60.00, Math.toRadians(360)))
-                        .lineTo(new Vector2d(61.00, 60.00))
+                        .lineToSplineHeading(new Pose2d(36.00, 10.00, Math.toRadians(360)))
+                        .lineTo(new Vector2d(61.00, 10.00))
                         .build();
 
 
@@ -163,8 +163,8 @@ public class CreepyCrawlyCode extends OpMode {
 
                 MiddleAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(22.00, 20.00, Math.toRadians(180.00)))
                         .addDisplacementMarker(() -> clawControl.openInsideClaw())
-                        .lineToLinearHeading(new Pose2d(36.00, 55.00, Math.toRadians(360.00)))
-                        .splineTo(new Vector2d(61.00, 60.00), Math.toRadians(360.00))
+                        .lineToLinearHeading(new Pose2d(36.00, 10.00, Math.toRadians(360.00)))
+                        .splineTo(new Vector2d(61.00, 10.00), Math.toRadians(360.00))
                         .build();
 
 
@@ -179,8 +179,8 @@ public class CreepyCrawlyCode extends OpMode {
                         .build();
 
                 RightAutoTwo = drive.trajectorySequenceBuilder(new Pose2d(23.00, 30.00, Math.toRadians(180.00)))
-                        .lineToLinearHeading(new Pose2d(36.00, 57.50, Math.toRadians(360.00)))
-                        .splineTo(new Vector2d(61.00, 57.50), Math.toRadians(360.00))
+                        .lineToLinearHeading(new Pose2d(36.00, 10.00, Math.toRadians(360.00)))
+                        .splineTo(new Vector2d(61.00, 10.00), Math.toRadians(360.00))
                         .build();
 
                 drive.setPoseEstimate(LeftAutoOne.start());

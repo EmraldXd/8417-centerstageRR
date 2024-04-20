@@ -172,7 +172,7 @@ public class tfodLoopRR extends OpMode {
                         .addDisplacementMarker(() -> clawControl.toggleArm())
                         .splineTo(new Vector2d(48.00, 33.50), Math.toRadians(360.00))
                         .addDisplacementMarker(() -> clawControl.openOutsideClaw())
-                        .lineToLinearHeading(new Pose2d(7.50, 40.00, Math.toRadians(181.00)))
+                        .lineToLinearHeading(new Pose2d(7.50, 37.50, Math.toRadians(181.00)))
                         .addDisplacementMarker(this::trajectoryFinished)
                         .addDisplacementMarker(this::addRobotAction)
                         .addDisplacementMarker(() -> actionRuntime.reset())
